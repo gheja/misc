@@ -1,0 +1,88 @@
+MPLINK 4.40, Linker
+Linker Map File - Created Tue Mar 06 00:16:14 2012
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x0004a0
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x00024f      
+            592 out of 8454 program addresses used, program memory utilization is 7%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                 eth_init   0x000098    program     static D:\works\voltmeter\prog1_3.asm
+          eth_send_packet   0x0000dd    program     static D:\works\voltmeter\prog1_3.asm
+                     init   0x00018a    program     static D:\works\voltmeter\prog1_3.asm
+                init_vars   0x000014    program     static D:\works\voltmeter\prog1_3.asm
+             led_blue_off   0x0001b7    program     static D:\works\voltmeter\prog1_3.asm
+              led_blue_on   0x0001b3    program     static D:\works\voltmeter\prog1_3.asm
+            led_green_off   0x0001af    program     static D:\works\voltmeter\prog1_3.asm
+             led_green_on   0x0001ab    program     static D:\works\voltmeter\prog1_3.asm
+              led_red_off   0x0001a7    program     static D:\works\voltmeter\prog1_3.asm
+               led_red_on   0x0001a3    program     static D:\works\voltmeter\prog1_3.asm
+                     loop   0x0001bc    program     static D:\works\voltmeter\prog1_3.asm
+                     main   0x0001bb    program     static D:\works\voltmeter\prog1_3.asm
+          measure_input_1   0x0001a1    program     static D:\works\voltmeter\prog1_3.asm
+          measure_input_2   0x0001a2    program     static D:\works\voltmeter\prog1_3.asm
+          ow_receive_byte   0x00014e    program     static D:\works\voltmeter\prog1_3.asm
+     ow_receive_byte_loop   0x000152    program     static D:\works\voltmeter\prog1_3.asm
+                 ow_reset   0x000133    program     static D:\works\voltmeter\prog1_3.asm
+             ow_send_byte   0x00016f    program     static D:\works\voltmeter\prog1_3.asm
+        ow_send_byte_loop   0x000174    program     static D:\works\voltmeter\prog1_3.asm
+         ow_strong_pullup   0x000127    program     static D:\works\voltmeter\prog1_3.asm
+                 spi_init   0x00006f    program     static D:\works\voltmeter\prog1_3.asm
+              spi_no_dump   0x000096    program     static D:\works\voltmeter\prog1_3.asm
+                 spi_send   0x00007d    program     static D:\works\voltmeter\prog1_3.asm
+            spi_send_loop   0x000082    program     static D:\works\voltmeter\prog1_3.asm
+            spi_send_wait   0x000087    program     static D:\works\voltmeter\prog1_3.asm
+                wait_1sec   0x000002    program     static D:\works\voltmeter\prog1_3.asm
+          wait_1sec_loop1   0x000004    program     static D:\works\voltmeter\prog1_3.asm
+          wait_1sec_loop2   0x000008    program     static D:\works\voltmeter\prog1_3.asm
+                 wait_5us   0x00000f    program     static D:\works\voltmeter\prog1_3.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                wait_1sec   0x000002    program     static D:\works\voltmeter\prog1_3.asm
+          wait_1sec_loop1   0x000004    program     static D:\works\voltmeter\prog1_3.asm
+          wait_1sec_loop2   0x000008    program     static D:\works\voltmeter\prog1_3.asm
+                 wait_5us   0x00000f    program     static D:\works\voltmeter\prog1_3.asm
+                init_vars   0x000014    program     static D:\works\voltmeter\prog1_3.asm
+                 spi_init   0x00006f    program     static D:\works\voltmeter\prog1_3.asm
+                 spi_send   0x00007d    program     static D:\works\voltmeter\prog1_3.asm
+            spi_send_loop   0x000082    program     static D:\works\voltmeter\prog1_3.asm
+            spi_send_wait   0x000087    program     static D:\works\voltmeter\prog1_3.asm
+              spi_no_dump   0x000096    program     static D:\works\voltmeter\prog1_3.asm
+                 eth_init   0x000098    program     static D:\works\voltmeter\prog1_3.asm
+          eth_send_packet   0x0000dd    program     static D:\works\voltmeter\prog1_3.asm
+         ow_strong_pullup   0x000127    program     static D:\works\voltmeter\prog1_3.asm
+                 ow_reset   0x000133    program     static D:\works\voltmeter\prog1_3.asm
+          ow_receive_byte   0x00014e    program     static D:\works\voltmeter\prog1_3.asm
+     ow_receive_byte_loop   0x000152    program     static D:\works\voltmeter\prog1_3.asm
+             ow_send_byte   0x00016f    program     static D:\works\voltmeter\prog1_3.asm
+        ow_send_byte_loop   0x000174    program     static D:\works\voltmeter\prog1_3.asm
+                     init   0x00018a    program     static D:\works\voltmeter\prog1_3.asm
+          measure_input_1   0x0001a1    program     static D:\works\voltmeter\prog1_3.asm
+          measure_input_2   0x0001a2    program     static D:\works\voltmeter\prog1_3.asm
+               led_red_on   0x0001a3    program     static D:\works\voltmeter\prog1_3.asm
+              led_red_off   0x0001a7    program     static D:\works\voltmeter\prog1_3.asm
+             led_green_on   0x0001ab    program     static D:\works\voltmeter\prog1_3.asm
+            led_green_off   0x0001af    program     static D:\works\voltmeter\prog1_3.asm
+              led_blue_on   0x0001b3    program     static D:\works\voltmeter\prog1_3.asm
+             led_blue_off   0x0001b7    program     static D:\works\voltmeter\prog1_3.asm
+                     main   0x0001bb    program     static D:\works\voltmeter\prog1_3.asm
+                     loop   0x0001bc    program     static D:\works\voltmeter\prog1_3.asm
+
+

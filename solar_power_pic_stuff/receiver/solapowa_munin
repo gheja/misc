@@ -1,0 +1,58 @@
+#!/bin/bash
+
+if [ "$1" = "autoconf" ]; then
+	echo yes 
+	exit 0
+fi
+
+if [ "$1" = "config" ]; then
+	echo 'graph_title Solapowa Temperatures (unfiltered)'
+	echo 'graph_args --base 1000 -l 0'
+	echo 'graph_scale no'
+	echo 'graph_category solapowa'
+	echo 't1a.label T1 (a)'
+	echo 't1a.draw LINE'
+	echo 't1b.label T1 (b)'
+	echo 't1b.draw LINE'
+	echo 't2a.label T2 (a)'
+	echo 't2a.draw LINE'
+	echo 't2b.label T2 (b)'
+	echo 't2b.draw LINE'
+	echo 't3a.label T3 (a)'
+	echo 't3a.draw LINE'
+	echo 't3b.label T3 (b)'
+	echo 't3b.draw LINE'
+	echo 't4a.label T4 (a)'
+	echo 't4a.draw LINE'
+	echo 't4b.label T4 (b)'
+	echo 't4b.draw LINE'
+	exit 0
+fi
+
+# awk '{printf "uptime.value %.2f\n",$1/86400}' /proc/uptime
+file="/var/tmp/solapowa.txt"
+
+echo -n "t1a.value "
+cat $file | grep "T1 temperature" | awk '{ print $3; }'
+
+echo -n "t1b.value "
+cat $file | grep "T1 temperature" | awk '{ print $5; }'
+
+echo -n "t2a.value "
+cat $file | grep "T2 temperature" | awk '{ print $3; }'
+
+echo -n "t2b.value "
+cat $file | grep "T2 temperature" | awk '{ print $5; }'
+
+echo -n "t3a.value "
+cat $file | grep "T3 temperature" | awk '{ print $3; }'
+
+echo -n "t3b.value "
+cat $file | grep "T3 temperature" | awk '{ print $5; }'
+
+echo -n "t4a.value "
+cat $file | grep "T4 temperature" | awk '{ print $3; }'
+
+echo -n "t4b.value "
+cat $file | grep "T4 temperature" | awk '{ print $5; }'
+

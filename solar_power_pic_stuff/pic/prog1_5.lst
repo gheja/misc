@@ -1,0 +1,2213 @@
+MPASM  5.42                       PROG1_5.ASM   3-11-2012  23:49:31         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00001         LIST p=16f877a ; Include file, change directory if needed
+                      00002         INCLUDE "p16f877a.inc"
+                      00001         LIST
+                      00002 
+                      00003 ;==========================================================================
+                      00004 ;  MPASM PIC16F877A processor include
+                      00005 ; 
+                      00006 ;  (c) Copyright 1999-2011 Microchip Technology, All rights reserved
+                      00007 ;==========================================================================
+                      00008 
+                      00555         LIST
+                      00003 
+                      00004         CBLOCK 0x20
+  00000020            00005         mac_dest_0
+  00000021            00006         mac_dest_1
+  00000022            00007         mac_dest_2
+  00000023            00008         mac_dest_3
+  00000024            00009         mac_dest_4
+  00000025            00010         mac_dest_5
+  00000026            00011         mac_src_0
+  00000027            00012         mac_src_1
+  00000028            00013         mac_src_2
+  00000029            00014         mac_src_3
+  0000002A            00015         mac_src_4
+  0000002B            00016         mac_src_5
+  0000002C            00017         mac_type_0
+  0000002D            00018         mac_type_1 ; 14 bytes
+                      00019 
+  0000002E            00020         ip_version_and_header_length
+  0000002F            00021         ip_dummy
+  00000030            00022         ip_length_0
+  00000031            00023         ip_length_1
+  00000032            00024         ip_packet_id_0
+  00000033            00025         ip_packet_id_1
+  00000034            00026         ip_flags_0
+  00000035            00027         ip_flags_1
+  00000036            00028         ip_ttl
+  00000037            00029         ip_protocol
+  00000038            00030         ip_header_checksum_0
+  00000039            00031         ip_header_checksum_1
+  0000003A            00032         ip_src_0
+  0000003B            00033         ip_src_1
+  0000003C            00034         ip_src_2
+  0000003D            00035         ip_src_3
+  0000003E            00036         ip_dest_0
+  0000003F            00037         ip_dest_1
+  00000040            00038         ip_dest_2
+  00000041            00039         ip_dest_3 ; 20 bytes (34 bytes total)
+                      00040 
+  00000042            00041         udp_src_port_0
+  00000043            00042         udp_src_port_1
+  00000044            00043         udp_dest_port_0
+  00000045            00044         udp_dest_port_1
+MPASM  5.42                       PROG1_5.ASM   3-11-2012  23:49:31         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+  00000046            00045         udp_length_0
+  00000047            00046         udp_length_1
+  00000048            00047         udp_checksum_0
+  00000049            00048         udp_checksum_1 ; 8 bytes (42 bytes total)
+                      00049 
+  0000004A            00050         magic ; always 0x65
+  0000004B            00051         eth_packet_type ; memory dump: 0x01
+  0000004C            00052         version
+  0000004D            00053         eee
+  0000004E            00054         sleep_0
+  0000004F            00055         sleep_1
+  00000050            00056         sleep_2
+  00000051            00057         interrupts
+  00000052            00058         wfi_loops_left
+                      00059 
+  00000053            00060         timer_time_0
+  00000054            00061         timer_time_1
+  00000055            00062         timer_time_2
+  00000056            00063         timer_time_3
+  00000057            00064         timer_interrupts
+                      00065 ;       timer_interval_passed ; xxxxDHMS (day passed, hour passed, ...)
+                      00066 
+  00000058            00067         spi_device_id
+  00000059            00068         spi_out_length
+  0000005A            00069         spi_out_0
+  0000005B            00070         spi_out_1
+  0000005C            00071         spi_out_2
+  0000005D            00072         spi_out_3
+  0000005E            00073         spi_out_4
+  0000005F            00074         spi_out_5
+  00000060            00075         spi_out_6
+  00000061            00076         spi_out_7
+  00000062            00077         spi_memory_start
+                      00078 
+  00000063            00079         ow_pd_byte ; presence detect (do we have anything on the wire?)
+  00000064            00080         ow_bits_left
+  00000065            00081         ow_buffer
+  00000066            00082         ow_current_device_0
+  00000067            00083         ow_current_device_1
+  00000068            00084         ow_current_device_2
+  00000069            00085         ow_current_device_3
+  0000006A            00086         ow_current_device_4
+  0000006B            00087         ow_current_device_5
+  0000006C            00088         ow_current_device_6
+  0000006D            00089         ow_current_device_7
+                      00090 
+  0000006E            00091         thermo_in_msb
+  0000006F            00092         thermo_in_lsb
+  00000070            00093         thermo_in_xsb
+                      00094 
+  00000071            00095         thermo1_value
+  00000072            00096         thermo1_value_fract
+  00000073            00097         thermo2_value
+MPASM  5.42                       PROG1_5.ASM   3-11-2012  23:49:31         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+  00000074            00098         thermo2_value_fract
+  00000075            00099         thermo3_value
+  00000076            00100         thermo3_value_fract
+  00000077            00101         thermo4_value
+  00000078            00102         thermo4_value_fract
+                      00103 
+  00000079            00104         panic_bits ; xxxxxxx0 0=temperature_check
+                      00105 
+                      00106         ENDC
+                      00107 
+                      00108         CBLOCK 0x7F ; fixed bytes (from 0x70..7F)
+  0000007F            00109         spi_memory_bank
+                      00110         ENDC
+                      00111 
+                      00112 ; config: 0x3F3A
+                      00113 
+0000                  00114         ORG 0x0000 ; start at the reset vector
+0000   2ADB           00115         GOTO main ; start the program
+                      00116 
+                      00117 ;       ORG 0x0004 ; interrupt vector
+                      00118 ;       GOTO handle_interrupt
+                      00119 
+                      00120 ; ==================================================================== common =
+                      00121 SETF:MACRO TARGET, VALUE
+                      00122         MOVLW VALUE
+                      00123         MOVWF TARGET
+                      00124         ENDM
+                      00125 
+                      00126 MOVFF:MACRO TARGET, SOURCE
+                      00127         MOVF SOURCE, W
+                      00128         MOVWF TARGET
+                      00129         ENDM
+                      00130 
+0001                  00131 wait_long
+                      00132         SETF sleep_1, 0x20
+0001   3020               M         MOVLW 0x20
+0002   00CF               M         MOVWF sleep_1
+0003                  00133 wait_long_loop1
+                      00134         SETF sleep_0, 0xFF
+0003   30FF               M         MOVLW 0xFF
+0004   00CE               M         MOVWF sleep_0
+0005                  00135 wait_long_loop2
+0005   0BCE           00136         DECFSZ sleep_0, F
+0006   2805           00137         GOTO wait_long_loop2
+0007   0BCF           00138         DECFSZ sleep_1, F
+0008   2803           00139         GOTO wait_long_loop1
+0009   0008           00140         RETURN
+                      00141 
+000A                  00142 wait_5us
+000A   0000           00143         NOP              ;1us
+000B   0000           00144         NOP              ;1us
+000C   0BD0           00145         DECFSZ sleep_2,F ;1us or 2us
+000D   280A           00146         GOTO wait_5us    ;2us
+MPASM  5.42                       PROG1_5.ASM   3-11-2012  23:49:31         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+000E   3400           00147         RETLW 0          ;2us
+                      00148 
+                      00149 ; ====================================================================== spi ==
+000F                  00150 spi_init
+000F   1283 1303      00151         BANKSEL PORTA ; BANK0
+0011   1408           00152         BSF PORTD, 0
+                      00153 
+0012   1683 1303      00154         BANKSEL TRISA ; BANK1
+0014   3040           00155         MOVLW 0x40
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0015   0094           00156         MOVWF SSPSTAT
+0016   1283 1303      00157         BANKSEL PORTA ; BANK0
+0018   3020           00158         MOVLW 0x20
+0019   0094           00159         MOVWF SSPCON
+001A   0008           00160         RETURN
+                      00161 
+001B                  00162 _spi_send_begin
+                      00163         ;; select device
+001B   1283 1303      00164         BANKSEL PORTA ; BANK0
+001D   1008           00165         BCF PORTD, 0
+001E   0008           00166         RETURN
+                      00167 
+001F                  00168 _spi_send_memory
+001F   1283 1303      00169         BANKSEL PORTA             ; BANK0
+                      00170 
+                      00171         ;; send the bytes
+0021   0862           00172         MOVF spi_memory_start, W  ; seek to the first byte
+0022   0084           00173         MOVWF FSR                 ; our pointer is "file select register"
+0023                  00174 _spi_send_loop
+0023   1394           00175         BCF SSPCON, 7             ; WCOL
+                      00176         
+0024   1003           00177         BCF STATUS, RB0           ; clear memory bank selection bits
+0025   1083           00178         BCF STATUS, RB1           ;
+0026   187F           00179         BTFSC spi_memory_bank, 0
+0027   1403           00180         BSF STATUS, RB0
+0028   18FF           00181         BTFSC spi_memory_bank, 1
+0029   1483           00182         BSF STATUS, RB1
+                      00183 
+002A   0800           00184         MOVF INDF, W              ; load the byte
+                      00185 
+002B   1283 1303      00186         BANKSEL PORTA ; BANK0
+002D   0093           00187         MOVWF SSPBUF              ; send the byte
+002E   1683 1303      00188         BANKSEL TRISA ; BANK1
+0030                  00189 _spi_send_wait
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0030   1C14           00190         BTFSS SSPSTAT, BF
+0031   2830           00191         GOTO _spi_send_wait
+0032   1283 1303      00192         BANKSEL PORTA ; BANK0
+0034   0A84           00193         INCF FSR, F               ; increase the pointer
+0035   0BD9           00194         DECFSZ spi_out_length, F  ; decrease the remaining byte counter
+0036   2823           00195         GOTO _spi_send_loop        ; go back if we have more bytes
+0037   0008           00196         RETURN
+                      00197 
+MPASM  5.42                       PROG1_5.ASM   3-11-2012  23:49:31         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0038                  00198 _spi_send_end
+                      00199         ;; deselect device
+0038   1408           00200         BSF PORTD, 0
+0039   0008           00201         RETURN
+                      00202 
+003A                  00203 spi_send
+003A   201B           00204         CALL _spi_send_begin
+                      00205 
+                      00206         SETF spi_memory_bank, 0x00
+003B   3000               M         MOVLW 0x00
+003C   00FF               M         MOVWF spi_memory_bank
+                      00207         SETF spi_memory_start, spi_out_0
+003D   305A               M         MOVLW spi_out_0
+003E   00E2               M         MOVWF spi_memory_start
+003F   201F           00208         CALL _spi_send_memory
+0040   2038           00209         CALL _spi_send_end
+0041   0008           00210         RETURN
+                      00211 
+0042                  00212 spi_send_and_dump
+0042   201B           00213         CALL _spi_send_begin
+                      00214 
+                      00215         SETF spi_memory_start, spi_out_0
+0043   305A               M         MOVLW spi_out_0
+0044   00E2               M         MOVWF spi_memory_start
+0045   201F           00216         CALL _spi_send_memory
+                      00217 
+                      00218         SETF spi_memory_bank, 0x00
+0046   3000               M         MOVLW 0x00
+0047   00FF               M         MOVWF spi_memory_bank
+                      00219         SETF spi_memory_start, 0x20
+0048   3020               M         MOVLW 0x20
+0049   00E2               M         MOVWF spi_memory_start
+                      00220         SETF spi_out_length, 0x2A
+004A   302A               M         MOVLW 0x2A
+004B   00D9               M         MOVWF spi_out_length
+004C   201F           00221         CALL _spi_send_memory
+                      00222 
+                      00223         SETF spi_memory_bank, 0x00
+004D   3000               M         MOVLW 0x00
+004E   00FF               M         MOVWF spi_memory_bank
+                      00224         SETF spi_memory_start, 0x00
+004F   3000               M         MOVLW 0x00
+0050   00E2               M         MOVWF spi_memory_start
+                      00225         SETF spi_out_length, 0x80
+0051   3080               M         MOVLW 0x80
+0052   00D9               M         MOVWF spi_out_length
+0053   201F           00226         CALL _spi_send_memory
+                      00227 
+                      00228         SETF spi_memory_bank, 0x01
+0054   3001               M         MOVLW 0x01
+0055   00FF               M         MOVWF spi_memory_bank
+                      00229         SETF spi_memory_start, 0x00
+0056   3000               M         MOVLW 0x00
+MPASM  5.42                       PROG1_5.ASM   3-11-2012  23:49:31         PAGE  6
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0057   00E2               M         MOVWF spi_memory_start
+                      00230         SETF spi_out_length, 0x80
+0058   3080               M         MOVLW 0x80
+0059   00D9               M         MOVWF spi_out_length
+005A   201F           00231         CALL _spi_send_memory
+                      00232 
+                      00233         SETF spi_memory_bank, 0x02
+005B   3002               M         MOVLW 0x02
+005C   00FF               M         MOVWF spi_memory_bank
+                      00234         SETF spi_memory_start, 0x00
+005D   3000               M         MOVLW 0x00
+005E   00E2               M         MOVWF spi_memory_start
+                      00235         SETF spi_out_length, 0x80
+005F   3080               M         MOVLW 0x80
+0060   00D9               M         MOVWF spi_out_length
+0061   201F           00236         CALL _spi_send_memory
+                      00237 
+                      00238         SETF spi_memory_bank, 0x03
+0062   3003               M         MOVLW 0x03
+0063   00FF               M         MOVWF spi_memory_bank
+                      00239         SETF spi_memory_start, 0x00
+0064   3000               M         MOVLW 0x00
+0065   00E2               M         MOVWF spi_memory_start
+                      00240         SETF spi_out_length, 0x80
+0066   3080               M         MOVLW 0x80
+0067   00D9               M         MOVWF spi_out_length
+0068   201F           00241         CALL _spi_send_memory
+                      00242 
+0069   2038           00243         CALL _spi_send_end
+006A   0008           00244         RETURN
+                      00245 
+                      00246 ; ================================================================= ethernet ==
+006B                  00247 eth_init
+006B   3001           00248         MOVLW 0x01 ; = eth
+006C   00D8           00249         MOVWF spi_device_id
+                      00250 
+                      00251         ;; eth: system reset (see doc 6.0)
+006D   30FF           00252         MOVLW 0xFF ; SC (reset)
+006E   00DA           00253         MOVWF spi_out_0
+                      00254 
+006F   3001           00255         MOVLW 0x01 ; spi: how many byte outputs follow
+0070   00D9           00256         MOVWF spi_out_length
+0071   203A           00257         CALL spi_send
+                      00258 
+0072   2001           00259         CALL wait_long
+                      00260 
+                      00261         ;; eth: select BANK0
+0073   30A0           00262         MOVLW 0xA0 ; BFC
+0074   381F           00263         IORLW 0x1F ; ECON1 (1F)
+0075   00DA           00264         MOVWF spi_out_0
+0076   3003           00265         MOVLW 0x03 ; xxxxxx00
+0077   00DB           00266         MOVWF spi_out_1
+                      00267 
+MPASM  5.42                       PROG1_5.ASM   3-11-2012  23:49:31         PAGE  7
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0078   3002           00268         MOVLW 0x02 ; spi: how many byte outputs follow
+0079   00D9           00269         MOVWF spi_out_length
+007A   203A           00270         CALL spi_send
+                      00271 
+                      00272 
+                      00273         ;; eth: set receive buffer start and end pointers (see doc 6.1)
+007B   3040           00274         MOVLW 0x40 ; WCR
+007C   3808           00275         IORLW 0x08 ; ERXSTL
+007D   00DA           00276         MOVWF spi_out_0
+007E   3000           00277         MOVLW 0x00 ; ... ERXSTL
+007F   00DB           00278         MOVWF spi_out_1
+0080   3000           00279         MOVLW 0x00 ; ... ERXSTH
+0081   00DC           00280         MOVWF spi_out_2
+0082   30FF           00281         MOVLW 0xFF ; ... ERXNDL
+0083   00DD           00282         MOVWF spi_out_3
+0084   300F           00283         MOVLW 0x0F ; ... ERXNDH
+0085   00DE           00284         MOVWF spi_out_4
+                      00285         
+0086   3005           00286         MOVLW 0x05 ;; spi: how many byte outputs follow
+0087   00D9           00287         MOVWF spi_out_length
+0088   203A           00288         CALL spi_send
+                      00289 
+                      00290 ;optimization...
+                      00291 ;       ;; eth: select BANK2
+                      00292 ;       MOVLW 0xA0 ; BFC
+                      00293 ;       IORLW 0x1F ; ECON1 (1F)
+                      00294 ;       MOVWF spi_out_1
+                      00295 ;       MOVLW 0x03 ; xxxxxx00
+                      00296 ;       MOVWF spi_out_2
+                      00297 ;
+                      00298 ;       MOVLW 0x02 ; spi: how many byte outputs follow
+                      00299 ;       MOVWF spi_out_length
+                      00300 ;       CALL spi_send
+                      00301 
+0089   3080           00302         MOVLW 0x80 ; BFS
+008A   381F           00303         IORLW 0x1F ; ECON1
+008B   00DA           00304         MOVWF spi_out_0
+008C   3002           00305         MOVLW 0x02 ; xxxxxx1x => xxxxxx10
+008D   00DB           00306         MOVWF spi_out_1
+                      00307 
+008E   3002           00308         MOVLW 0x02 ; spi: how many byte outputs follow
+008F   00D9           00309         MOVWF spi_out_length
+0090   203A           00310         CALL spi_send
+                      00311 
+                      00312 
+                      00313         ;; init MAC parameters (see doc 6.5)
+0091   3040           00314         MOVLW 0x40 ; WCR
+0092   3800           00315         IORLW 0x00 ; MACON1 (00)
+0093   00DA           00316         MOVWF spi_out_0
+0094   300D           00317         MOVLW 0x0D ; ... MACON1
+0095   00DB           00318         MOVWF spi_out_1
+0096   3000           00319         MOVLW 0x00 ; ... MACON2
+0097   00DC           00320         MOVWF spi_out_2
+MPASM  5.42                       PROG1_5.ASM   3-11-2012  23:49:31         PAGE  8
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0098   3077           00321         MOVLW 0x77 ; ... MACON3
+0099   00DD           00322         MOVWF spi_out_3
+009A   3003           00323         MOVLW 0x03 ; ... MACON4
+009B   00DE           00324         MOVWF spi_out_4
+009C   300F           00325         MOVLW 0x0F ; ... MABBIPG
+009D   00DF           00326         MOVWF spi_out_5
+                      00327         
+009E   3006           00328         MOVLW 0x06 ;; spi: how many byte outputs follow
+009F   00D9           00329         MOVWF spi_out_length
+00A0   203A           00330         CALL spi_send
+                      00331 
+                      00332         
+                      00333         ;; init LEDs by writing the PHLCON register indirectly (see doc 2.6 and 3.3.2)
+00A1   3040           00334         MOVLW 0x40 ; WCR
+00A2   3814           00335         IORLW 0x14 ; MIREGADR (14)
+00A3   00DA           00336         MOVWF spi_out_0
+00A4   3014           00337         MOVLW 0x14 ; ... MIREGADR (14 = eth PHLCON)
+00A5   00DB           00338         MOVWF spi_out_1
+00A6   3000           00339         MOVLW 0x00 ; ... -
+00A7   00DC           00340         MOVWF spi_out_2
+00A8   3072           00341         MOVLW 0x72 ; ... MIWRL
+00A9   00DD           00342         MOVWF spi_out_3
+00AA   3004           00343         MOVLW 0x04 ; ... MIWRH
+00AB   00DE           00344         MOVWF spi_out_4
+                      00345         
+00AC   3005           00346         MOVLW 0x05 ;; spi: how many byte outputs follow
+00AD   00D9           00347         MOVWF spi_out_length
+00AE   203A           00348         CALL spi_send
+                      00349 
+00AF   0008           00350         RETURN
+                      00351 
+                      00352 ;;; test function to turn on both LEDs on eth
+                      00353 ;eth_leds_on
+                      00354 ;       BANKSEL PORTA ; BANK0
+                      00355 ;
+                      00356 ;       MOVLW 0x01 ; = eth
+                      00357 ;       MOVWF spi_device_id
+                      00358 ;
+                      00359 ;       ;; eth select BANK2
+                      00360 ;       MOVLW 0xA0 ; BFC
+                      00361 ;       IORLW 0x1F ; ECON1 (1F)
+                      00362 ;       MOVWF spi_out_1
+                      00363 ;       MOVLW 0x03
+                      00364 ;       MOVWF spi_out_2
+                      00365 ;
+                      00366 ;       MOVLW 0x02 ; spi: how many byte outputs follow
+                      00367 ;       MOVWF spi_out_length
+                      00368 ;       CALL spi_send
+                      00369 ;
+                      00370 ;       MOVLW 0x80 ; BFS
+                      00371 ;       IORLW 0x1F ; ECON1 (1F)
+                      00372 ;       MOVWF spi_out_1
+                      00373 ;       MOVLW 0x02
+MPASM  5.42                       PROG1_5.ASM   3-11-2012  23:49:31         PAGE  9
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00374 ;       MOVWF spi_out_2
+                      00375 ;
+                      00376 ;       MOVLW 0x02 ; spi: how many byte outputs follow
+                      00377 ;       MOVWF spi_out_length
+                      00378 ;       CALL spi_send
+                      00379 ;
+                      00380 ;
+                      00381 ;       MOVLW 0x40 ; WCR
+                      00382 ;       IORLW 0x14 ; MIREGADR (14)
+                      00383 ;       MOVWF spi_out_1
+                      00384 ;       MOVLW 0x14 ; ... MIREGADR (14 = eth PHLCON)
+                      00385 ;       MOVWF spi_out_2
+                      00386 ;       MOVLW 0x00 ; ... -
+                      00387 ;       MOVWF spi_out_3
+                      00388 ;       MOVLW 0x82 ; ... MIWRL
+                      00389 ;       MOVWF spi_out_4
+                      00390 ;       MOVLW 0x08 ; ... MIWRH
+                      00391 ;       MOVWF spi_out_5
+                      00392 ;       
+                      00393 ;       MOVLW 0x05 ;; spi: how many byte outputs follow
+                      00394 ;       MOVWF spi_out_length
+                      00395 ;       CALL spi_send
+                      00396 ;
+                      00397 ;       RETURN
+                      00398 
+00B0                  00399 eth_send_packet
+00B0   1283 1303      00400         BANKSEL PORTA ; BANK0
+                      00401 
+                      00402         ;; eth: select BANK0
+00B2   30A0           00403         MOVLW 0xA0 ; BFC
+00B3   381F           00404         IORLW 0x1F ; ECON1 (1F)
+00B4   00DA           00405         MOVWF spi_out_0
+00B5   3003           00406         MOVLW 0x03 ; xxxxxx00
+00B6   00DB           00407         MOVWF spi_out_1
+                      00408 
+00B7   3002           00409         MOVLW 0x02 ; spi: how many byte outputs follow
+00B8   00D9           00410         MOVWF spi_out_length
+00B9   203A           00411         CALL spi_send
+                      00412 
+                      00413 
+                      00414         ;; eth: set up ETXST (see doc 7.1.1)
+00BA   3040           00415         MOVLW 0x40 ; WCR
+00BB   3804           00416         IORLW 0x04 ; ETXSTL
+00BC   00DA           00417         MOVWF spi_out_0
+00BD   3000           00418         MOVLW 0x00 ; ... ETXSTL
+00BE   00DB           00419         MOVWF spi_out_1
+00BF   3010           00420         MOVLW 0x10 ; ... ETXSTH
+00C0   00DC           00421         MOVWF spi_out_2
+                      00422         
+00C1   3003           00423         MOVLW 0x03 ;; spi: how many byte outputs follow
+00C2   00D9           00424         MOVWF spi_out_length
+00C3   203A           00425         CALL spi_send
+                      00426 
+MPASM  5.42                       PROG1_5.ASM   3-11-2012  23:49:31         PAGE 10
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00427 
+                      00428         ;; eth: set up EWRPT (see doc 7.1.1)
+00C4   3040           00429         MOVLW 0x40 ; WCR
+00C5   3802           00430         IORLW 0x02 ; EWRPTL
+00C6   00DA           00431         MOVWF spi_out_0
+00C7   3000           00432         MOVLW 0x00 ; ... EWRPTL
+00C8   00DB           00433         MOVWF spi_out_1
+00C9   3010           00434         MOVLW 0x10 ; ... EWRPTH
+00CA   00DC           00435         MOVWF spi_out_2
+                      00436         
+00CB   3003           00437         MOVLW 0x03 ;; spi: how many byte outputs follow
+00CC   00D9           00438         MOVWF spi_out_length
+00CD   203A           00439         CALL spi_send
+                      00440 
+                      00441 
+                      00442         ;; eth: send the "per packet control byte" and the data payload (see doc 7.1.2)
+                      00443         ;;      the payload is actually the whole memory :)
+00CE   3060           00444         MOVLW 0x60 ; WBM
+00CF   381A           00445         IORLW 0x1A ; required argument
+00D0   00DA           00446         MOVWF spi_out_0
+00D1   3000           00447         MOVLW 0x00 ; the "per packet control byte"
+00D2   00DB           00448         MOVWF spi_out_1
+                      00449         
+                      00450 ;       BSF spi_memory_dump, 0 ; enable memory dump with next spi_send
+                      00451 
+00D3   3002           00452         MOVLW 0x02 ;; spi: how many byte outputs follow (before the memory dump)
+00D4   00D9           00453         MOVWF spi_out_length
+                      00454 ;       CALL spi_send
+00D5   2042           00455         CALL spi_send_and_dump
+                      00456         
+                      00457 
+                      00458         ;; eth: set up ETXND (see doc 7.1.3)
+00D6   3040           00459         MOVLW 0x40 ; WCR
+00D7   3806           00460         IORLW 0x06 ; ETXNDL
+00D8   00DA           00461         MOVWF spi_out_0
+                      00462 ;       MOVLW 0x60 ; ... ETXNDL
+00D9   302A           00463         MOVLW 0x2A ; ... ETXNDL
+00DA   00DB           00464         MOVWF spi_out_1
+                      00465 ;       MOVLW 0x10 ; ... ETXNDH
+00DB   3012           00466         MOVLW 0x12 ; ... ETXNDH
+00DC   00DC           00467         MOVWF spi_out_2
+                      00468         
+00DD   3003           00469         MOVLW 0x03 ;; spi: how many byte outputs follow
+00DE   00D9           00470         MOVWF spi_out_length
+00DF   203A           00471         CALL spi_send
+                      00472 
+                      00473 
+                      00474         ;; eth: clear EIR.TXIF (see doc 7.1.4)
+00E0   30A0           00475         MOVLW 0xA0 ; BFC
+00E1   381C           00476         IORLW 0x1C ; EIR
+00E2   00DA           00477         MOVWF spi_out_0
+00E3   3008           00478         MOVLW 0x08 ; .TXIF => 0
+00E4   00DB           00479         MOVWF spi_out_1
+MPASM  5.42                       PROG1_5.ASM   3-11-2012  23:49:31         PAGE 11
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00480         
+00E5   3002           00481         MOVLW 0x02 ;; spi: how many byte outputs follow
+00E6   00D9           00482         MOVWF spi_out_length
+00E7   203A           00483         CALL spi_send
+                      00484 
+                      00485 
+                      00486         ;; eth: set EIE.TXIE (see doc 7.1.4)
+00E8   3080           00487         MOVLW 0x80 ; BFS
+00E9   381B           00488         IORLW 0x1B ; EIE
+00EA   00DA           00489         MOVWF spi_out_0
+00EB   3080           00490         MOVLW 0x80 ; .TXIF => 0
+00EC   00DB           00491         MOVWF spi_out_1
+                      00492         
+00ED   3002           00493         MOVLW 0x02 ;; spi: how many byte outputs follow
+00EE   00D9           00494         MOVWF spi_out_length
+00EF   203A           00495         CALL spi_send
+                      00496 
+                      00497 
+                      00498         ;; eth: set ECON1.TXRTS (see doc 7.1.5)
+00F0   3080           00499         MOVLW 0x80 ; BFS
+00F1   381F           00500         IORLW 0x1F ; ECON1
+00F2   00DA           00501         MOVWF spi_out_0
+00F3   3008           00502         MOVLW 0x08 ; .TXRTS => 1
+00F4   00DB           00503         MOVWF spi_out_1
+                      00504         
+00F5   3002           00505         MOVLW 0x02 ;; spi: how many outputs follow
+00F6   00D9           00506         MOVWF spi_out_length
+00F7   203A           00507         CALL spi_send
+                      00508 
+                      00509         
+00F8   0008           00510         RETURN
+                      00511 
+                      00512 ; ============================================================== ow (1-wire) ==
+  0007                00513         constant OW_PORT=PORTC
+  0087                00514         constant OW_TRIS=TRISC
+  0007                00515         constant OW_BIT=7
+                      00516 
+                      00517 OW_HIZ:MACRO
+                      00518 ;Force the DQ line into a high impedance (HiZ) state.
+                      00519         BSF    STATUS,RP0      ; BANK1
+                      00520         BSF    OW_TRIS, OW_BIT ; make DQ pin an input (HiZ)
+                      00521         BCF    STATUS,RP0      ; BANK0
+                      00522         ENDM
+                      00523 
+                      00524 OW_LO:MACRO
+                      00525 ;Force the DQ line to a logic low.
+                      00526         BCF STATUS,RP0      ; BANK0
+                      00527         BCF OW_PORT, OW_BIT ; Clear the DQ bit
+                      00528         BSF STATUS,RP0      ; BANK1
+                      00529         BCF OW_PORT, OW_BIT ; Make DQ pin an output
+                      00530         BCF STATUS,RP0      ; BANK0
+                      00531         ENDM
+                      00532 
+MPASM  5.42                       PROG1_5.ASM   3-11-2012  23:49:31         PAGE 12
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00533 OW_WAIT:MACRO TIME ; wait for TIME us (microseconds), must be in multiples of 5
+                      00534         MOVLW (TIME/5)-1 ; 1us
+                      00535         MOVWF sleep_2    ; 1us
+                      00536         CALL wait_5us    ; 2us
+                      00537         ENDM
+                      00538 
+00F9                  00539 ow_strong_pullup_begin
+00F9   1283 1303      00540         BANKSEL PORTA  ; BANK0
+                      00541         OW_HIZ         ; bring it up
+                          M ;Force the DQ line into a high impedance (HiZ) state.
+00FB   1683               M         BSF    STATUS,RP0      ; BANK1
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+00FC   1787               M         BSF    OW_TRIS, OW_BIT ; make DQ pin an input (HiZ)
+00FD   1283               M         BCF    STATUS,RP0      ; BANK0
+00FE   0008           00542         RETURN
+                      00543 
+00FF                  00544 ow_strong_pullup_end
+00FF   1283 1303      00545         BANKSEL PORTA  ; BANK0
+                      00546         OW_LO          ; bring down DQ
+                          M ;Force the DQ line to a logic low.
+0101   1283               M         BCF STATUS,RP0      ; BANK0
+0102   1387               M         BCF OW_PORT, OW_BIT ; Clear the DQ bit
+0103   1683               M         BSF STATUS,RP0      ; BANK1
+0104   1387               M         BCF OW_PORT, OW_BIT ; Make DQ pin an output
+0105   1283               M         BCF STATUS,RP0      ; BANK0
+0106   0008           00547         RETURN
+                      00548 
+0107                  00549 ow_reset
+0107   1283 1303      00550         BANKSEL PORTA         ; BANK0
+                      00551         OW_HIZ                ; Start with the line high
+                          M ;Force the DQ line into a high impedance (HiZ) state.
+0109   1683               M         BSF    STATUS,RP0      ; BANK1
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+010A   1787               M         BSF    OW_TRIS, OW_BIT ; make DQ pin an input (HiZ)
+010B   1283               M         BCF    STATUS,RP0      ; BANK0
+010C   3000           00552         MOVLW 0x00
+010D   00E3           00553         MOVWF ow_pd_byte      ; Clear the PD byte
+                      00554         OW_LO                 ; bring down DQ
+                          M ;Force the DQ line to a logic low.
+010E   1283               M         BCF STATUS,RP0      ; BANK0
+010F   1387               M         BCF OW_PORT, OW_BIT ; Clear the DQ bit
+0110   1683               M         BSF STATUS,RP0      ; BANK1
+0111   1387               M         BCF OW_PORT, OW_BIT ; Make DQ pin an output
+0112   1283               M         BCF STATUS,RP0      ; BANK0
+                      00555         OW_WAIT .500          ; ... for 500 us
+0113   3063               M         MOVLW (.500/5)-1 ; 1us
+0114   00D0               M         MOVWF sleep_2    ; 1us
+0115   200A               M         CALL wait_5us    ; 2us
+                      00556         OW_HIZ                ; bring it back up
+                          M ;Force the DQ line into a high impedance (HiZ) state.
+0116   1683               M         BSF    STATUS,RP0      ; BANK1
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0117   1787               M         BSF    OW_TRIS, OW_BIT ; make DQ pin an input (HiZ)
+MPASM  5.42                       PROG1_5.ASM   3-11-2012  23:49:31         PAGE 13
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0118   1283               M         BCF    STATUS,RP0      ; BANK0
+                      00557         OW_WAIT .70           ; ... for 70 us to wait for PD pulse
+0119   300D               M         MOVLW (.70/5)-1  ; 1us
+011A   00D0               M         MOVWF sleep_2    ; 1us
+011B   200A               M         CALL wait_5us    ; 2us
+011C   1F87           00558         BTFSS OW_PORT, OW_BIT ; read for a PD Pulse
+011D   0AE3           00559         INCF ow_pd_byte, F    ; set PDBYTE to 1 if get a PD pulse
+                      00560         OW_WAIT .400          ; wait 400us after PD pulse (kill the line)
+011E   304F               M         MOVLW (.400/5)-1 ; 1us
+011F   00D0               M         MOVWF sleep_2    ; 1us
+0120   200A               M         CALL wait_5us    ; 2us
+0121   0008           00561         RETURN
+                      00562 
+0122                  00563 ow_send_byte
+0122   1283 1303      00564         BANKSEL PORTA          ; BANK0
+0124   00E5           00565         MOVWF ow_buffer        ; send the byte from W to ow_buffer
+0125   3008           00566         MOVLW .8
+0126   00E4           00567         MOVWF ow_bits_left     ; we are sending 8 bits
+0127                  00568 ow_send_byte_loop
+                      00569         OW_LO                  ; bring down DQ
+                          M ;Force the DQ line to a logic low.
+0127   1283               M         BCF STATUS,RP0      ; BANK0
+0128   1387               M         BCF OW_PORT, OW_BIT ; Clear the DQ bit
+0129   1683               M         BSF STATUS,RP0      ; BANK1
+012A   1387               M         BCF OW_PORT, OW_BIT ; Make DQ pin an output
+012B   1283               M         BCF STATUS,RP0      ; BANK0
+012C   0000           00570         NOP                    ; ... and wait 3us
+012D   0CE5           00571         RRF ow_buffer,F        ; get the first bit by shifting the buffer rightwise (EXPLAIN!)
+012E   1683           00572         BSF STATUS,RP0         ; BANK1
+012F   1803           00573         BTFSC STATUS,C         ; if the first bit (LSB) is 1 ...
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0130   1787           00574         BSF OW_TRIS,OW_BIT     ; ... then HiZ the output
+0131   1283           00575         BCF STATUS,RP0         ; BANK0
+                      00576         OW_WAIT .60            ; keep the output this way for 60us
+0132   300B               M         MOVLW (.60/5)-1  ; 1us
+0133   00D0               M         MOVWF sleep_2    ; 1us
+0134   200A               M         CALL wait_5us    ; 2us
+                      00577         OW_HIZ                 ; HiZ the output (even if it was HiZ'd before)
+                          M ;Force the DQ line into a high impedance (HiZ) state.
+0135   1683               M         BSF    STATUS,RP0      ; BANK1
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0136   1787               M         BSF    OW_TRIS, OW_BIT ; make DQ pin an input (HiZ)
+0137   1283               M         BCF    STATUS,RP0      ; BANK0
+0138   0000           00578         NOP                    ; recovery time (2us total)
+0139   0000           00579         NOP
+013A   0BE4           00580         DECFSZ ow_bits_left, F ; one less bits left
+013B   2927           00581         GOTO ow_send_byte_loop
+013C   0008           00582         RETURN
+                      00583 
+013D                  00584 ow_receive_byte
+013D   1283 1303      00585         BANKSEL PORTA              ; BANK0
+013F   3008           00586         MOVLW .8
+0140   00E4           00587         MOVWF ow_bits_left         ; we are waiting for 8 bits
+MPASM  5.42                       PROG1_5.ASM   3-11-2012  23:49:31         PAGE 14
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0141                  00588 ow_receive_byte_loop
+                      00589     OW_LO                      ; bring down DQ
+                          M ;Force the DQ line to a logic low.
+0141   1283               M         BCF STATUS,RP0      ; BANK0
+0142   1387               M         BCF OW_PORT, OW_BIT ; Clear the DQ bit
+0143   1683               M         BSF STATUS,RP0      ; BANK1
+0144   1387               M         BCF OW_PORT, OW_BIT ; Make DQ pin an output
+0145   1283               M         BCF STATUS,RP0      ; BANK0
+0146   0000           00590     NOP                        ; ... and wait 6us
+0147   0000           00591     NOP
+0148   0000           00592     NOP
+0149   0000           00593     NOP
+014A   0000           00594     NOP
+014B   0000           00595     NOP
+                      00596     OW_HIZ                     ; change to HiZ 
+                          M ;Force the DQ line into a high impedance (HiZ) state.
+014C   1683               M         BSF    STATUS,RP0      ; BANK1
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+014D   1787               M         BSF    OW_TRIS, OW_BIT ; make DQ pin an input (HiZ)
+014E   1283               M         BCF    STATUS,RP0      ; BANK0
+014F   0000           00597         NOP                        ; wait 4µs
+0150   0000           00598         NOP
+0151   0000           00599         NOP
+0152   0000           00600         NOP                        
+0153   0807           00601         MOVF OW_PORT, W            ; read DQ
+0154   3980           00602         ANDLW 1<<OW_BIT            ; mask off the DQ bit
+0155   3EFF           00603         ADDLW 0xFF                 ; C=1 if DQ=1: C=0 if DQ=0
+0156   0CE5           00604         RRF ow_buffer, F           ; shift C into IOBYTE
+                      00605         OW_WAIT .50                ; wait 50µs to end of time slot
+0157   3009               M         MOVLW (.50/5)-1  ; 1us
+0158   00D0               M         MOVWF sleep_2    ; 1us
+0159   200A               M         CALL wait_5us    ; 2us
+015A   0BE4           00606         DECFSZ ow_bits_left, F     ; decrement the bit counter
+015B   2941           00607         GOTO ow_receive_byte_loop
+015C   0865           00608         MOVF ow_buffer, W
+015D   0008           00609         RETURN
+                      00610 
+015E                  00611 ow_reset_and_select
+015E   2107           00612         CALL ow_reset
+015F   3055           00613         MOVLW 0x55 ; select device
+0160   2122           00614         CALL ow_send_byte
+0161   0866           00615         MOVF ow_current_device_0, W
+0162   2122           00616         CALL ow_send_byte
+0163   0867           00617         MOVF ow_current_device_1, W
+0164   2122           00618         CALL ow_send_byte
+0165   0868           00619         MOVF ow_current_device_2, W
+0166   2122           00620         CALL ow_send_byte
+0167   0869           00621         MOVF ow_current_device_3, W
+0168   2122           00622         CALL ow_send_byte
+0169   086A           00623         MOVF ow_current_device_4, W
+016A   2122           00624         CALL ow_send_byte
+016B   086B           00625         MOVF ow_current_device_5, W
+016C   2122           00626         CALL ow_send_byte
+MPASM  5.42                       PROG1_5.ASM   3-11-2012  23:49:31         PAGE 15
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+016D   086C           00627         MOVF ow_current_device_6, W
+016E   2122           00628         CALL ow_send_byte
+016F   086D           00629         MOVF ow_current_device_7, W
+0170   2122           00630         CALL ow_send_byte
+0171   0008           00631         RETURN
+                      00632 
+                      00633 ; ============================================================ thermo(meter) ==
+                      00634 ;       1: 1013 c1f5 0108 003b
+                      00635 ;       2: 1033 9df5 0108 0039
+                      00636 ;       3: 1079 94f5 0108 0070
+                      00637 ;       4: 10f7 97f5 0108 00c7
+                      00638 
+0172                  00639 thermo_detect_one_device
+0172   2107           00640         CALL ow_reset
+0173   3033           00641         MOVLW 0x33 ; find one device
+0174   2122           00642         CALL ow_send_byte
+0175   213D           00643         CALL ow_receive_byte
+0176   00E6           00644         MOVWF ow_current_device_0
+0177   213D           00645         CALL ow_receive_byte
+0178   00E7           00646         MOVWF ow_current_device_1
+0179   213D           00647         CALL ow_receive_byte
+017A   00E8           00648         MOVWF ow_current_device_2
+017B   213D           00649         CALL ow_receive_byte
+017C   00E9           00650         MOVWF ow_current_device_3
+017D   213D           00651         CALL ow_receive_byte
+017E   00EA           00652         MOVWF ow_current_device_4
+017F   213D           00653         CALL ow_receive_byte
+0180   00EB           00654         MOVWF ow_current_device_5
+0181   213D           00655         CALL ow_receive_byte
+0182   00EC           00656         MOVWF ow_current_device_6
+0183   213D           00657         CALL ow_receive_byte
+0184   00ED           00658         MOVWF ow_current_device_7
+0185   0008           00659         RETURN
+                      00660 
+0186                  00661 thermo_measure_begin
+0186   215E           00662         CALL ow_reset_and_select
+0187   3044           00663         MOVLW 0x44 ; convert T
+0188   2122           00664         CALL ow_send_byte
+0189   20F9           00665         CALL ow_strong_pullup_begin
+018A   0008           00666         RETURN
+                      00667 
+018B                  00668 thermo_measure_end
+018B   20FF           00669         CALL ow_strong_pullup_end
+018C   0008           00670         RETURN
+                      00671 
+018D                  00672 thermo_read
+018D   215E           00673         CALL ow_reset_and_select
+018E   30BE           00674         MOVLW 0xBE ; read scratchpad
+018F   2122           00675         CALL ow_send_byte
+0190   213D           00676         CALL ow_receive_byte ; LSB
+0191   00EF           00677         MOVWF thermo_in_lsb
+0192   213D           00678         CALL ow_receive_byte ; MSB
+0193   00EE           00679         MOVWF thermo_in_msb
+MPASM  5.42                       PROG1_5.ASM   3-11-2012  23:49:31         PAGE 16
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0194   213D           00680         CALL ow_receive_byte ; (TH register - ignore)
+0195   213D           00681         CALL ow_receive_byte ; (TL register - ignore)
+0196   213D           00682         CALL ow_receive_byte ; (reserved - ignore)
+0197   213D           00683         CALL ow_receive_byte ; (reserved - ignore)
+0198   213D           00684         CALL ow_receive_byte ; count remain
+0199   00F0           00685         MOVWF thermo_in_xsb
+019A   213D           00686         CALL ow_receive_byte ; (count per celsius, always 0x10 - ignore)
+019B   213D           00687         CALL ow_receive_byte ; (crc - ignore)
+                      00688 
+                      00689 ; input:
+                      00690 ;      MSB      LSB
+                      00691 ; 00000000 10101010 = 0x00AA =  85.0 'C
+                      00692 ; 00000000 00110010 = 0x0032 =  25.0 'C
+                      00693 ; 00000000 00000001 = 0x0001 =   0.5 'C
+                      00694 ; 00000000 00000000 = 0x0000 =   0.0 'C
+                      00695 ; 11111111 11111111 = 0xFFFF =  -0.5 'C
+                      00696 ; 11111111 11111110 = 0xFFFE =  -1.0 'C
+                      00697 ; 11111111 11001110 = 0xFFCE = -25.0 'C
+                      00698 ; 11111111 10010010 = 0xFF92 = -55.0 'C
+                      00699 ;
+                      00700 ; output:
+                      00701 ;   LSB[7]   positive(0) or negative (1)
+                      00702 ;   LSB[6-0] value in Celsius (integer)
+                      00703 ;   XSB[7-5] always 0
+                      00704 ;   XSB[4-0] value in Celsius/32
+                      00705 
+019C   0CEF           00706         RRF thermo_in_lsb, F
+019D   1803           00707         BTFSC STATUS,C
+019E   1670           00708         BSF thermo_in_xsb, 4
+019F   1C6E           00709         BTFSS thermo_in_msb, 0 ; if negative result
+01A0   29A3           00710         GOTO thermo_read_1
+01A1   30FF           00711         MOVLW 0xFF
+01A2   06EF           00712         XORWF thermo_in_lsb, F
+01A3                  00713 thermo_read_1
+01A3   0008           00714         RETURN
+                      00715 
+                      00716 ; ==================================================================== timer ==
+  0005                00717         constant TIMER_BANK=PORTA
+                      00718 
+01A4                  00719 timer_init
+01A4   1283 1303      00720         BANKSEL TIMER_BANK
+01A6   01D6           00721         CLRF timer_time_3
+01A7   01D5           00722         CLRF timer_time_2
+01A8   01D4           00723         CLRF timer_time_1
+01A9   01D3           00724         CLRF timer_time_0
+01AA   01D7           00725         CLRF timer_interrupts
+01AB   0008           00726         RETURN
+                      00727 
+01AC                  00728 timer_increase_second
+01AC   1283 1303      00729         BANKSEL TIMER_BANK
+01AE   0AD6           00730         INCF timer_time_3, F
+01AF   1903           00731         BTFSC STATUS,Z
+01B0   0AD5           00732         INCF timer_time_2, F
+MPASM  5.42                       PROG1_5.ASM   3-11-2012  23:49:31         PAGE 17
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+01B1   1903           00733         BTFSC STATUS,Z
+01B2   0AD4           00734         INCF timer_time_1, F
+01B3   1903           00735         BTFSC STATUS,Z
+01B4   0AD3           00736         INCF timer_time_0, F
+01B5   0008           00737         RETURN
+                      00738 
+01B6                  00739 timer_interrupt_caught
+01B6   0AD7           00740         INCF timer_interrupts, F
+01B7   1D57           00741         BTFSS timer_interrupts, 2 ; 4 interrupts have not been caught yet (4x250ms = 1s)
+01B8   0008           00742         RETURN
+01B9   21AC           00743         CALL timer_increase_second
+01BA   01D7           00744         CLRF timer_interrupts
+01BB   0008           00745         RETURN
+                      00746 
+                      00747 ; ================================================================ voltmeter ==
+                      00748 ; current flowing through ports at 3.12 V: 0.0602 A
+                      00749 ; 
+                      00750 
+                      00751 ; ===================================================================== main ==
+                      00752 WFI_MACRO:MACRO DURATION
+                      00753         MOVLW DURATION
+                      00754         CALL wfi_loop
+                      00755         ENDM
+                      00756 
+01BC                  00757 led_status_red
+01BC   1283 1303      00758         BANKSEL PORTA ; BANK0
+01BE   1208           00759         BCF PORTD, 4
+01BF   1688           00760         BSF PORTD, 5
+01C0   0008           00761         RETURN
+                      00762 
+01C1                  00763 led_status_green
+01C1   1283 1303      00764         BANKSEL PORTA ; BANK0
+01C3   1288           00765         BCF PORTD, 5
+01C4   1608           00766         BSF PORTD, 4
+01C5   0008           00767         RETURN
+                      00768 
+01C6                  00769 led_charge_off
+01C6   1283 1303      00770         BANKSEL PORTA ; BANK0
+01C8   1308           00771         BCF PORTD, 6
+01C9   1388           00772         BCF PORTD, 7
+01CA   0008           00773         RETURN
+                      00774 
+01CB                  00775 led_charge_yellow
+01CB   1283 1303      00776         BANKSEL PORTA ; BANK0
+01CD   1708           00777         BSF PORTD, 6
+01CE   1788           00778         BSF PORTD, 7
+01CF   0008           00779         RETURN
+                      00780 
+01D0                  00781 led_charge_green
+01D0   1283 1303      00782         BANKSEL PORTA ; BANK0
+01D2   1308           00783         BCF PORTD, 6
+01D3   1788           00784         BSF PORTD, 7
+01D4   0008           00785         RETURN
+MPASM  5.42                       PROG1_5.ASM   3-11-2012  23:49:31         PAGE 18
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00786 
+                      00787 
+01D5                  00788 init_vars
+                      00789         SETF mac_dest_0, 0xF4
+01D5   30F4               M         MOVLW 0xF4
+01D6   00A0               M         MOVWF mac_dest_0
+                      00790         SETF mac_dest_1, 0x6D
+01D7   306D               M         MOVLW 0x6D
+01D8   00A1               M         MOVWF mac_dest_1
+                      00791         SETF mac_dest_2, 0x04
+01D9   3004               M         MOVLW 0x04
+01DA   00A2               M         MOVWF mac_dest_2
+                      00792         SETF mac_dest_3, 0xE7
+01DB   30E7               M         MOVLW 0xE7
+01DC   00A3               M         MOVWF mac_dest_3
+                      00793         SETF mac_dest_4, 0xB2
+01DD   30B2               M         MOVLW 0xB2
+01DE   00A4               M         MOVWF mac_dest_4
+                      00794         SETF mac_dest_5, 0x34
+01DF   3034               M         MOVLW 0x34
+01E0   00A5               M         MOVWF mac_dest_5
+                      00795         SETF mac_src_0, 0xE0
+01E1   30E0               M         MOVLW 0xE0
+01E2   00A6               M         MOVWF mac_src_0
+                      00796         SETF mac_src_1, 0xCB 
+01E3   30CB               M         MOVLW 0xCB
+01E4   00A7               M         MOVWF mac_src_1
+                      00797         SETF mac_src_2, 0x4E 
+01E5   304E               M         MOVLW 0x4E
+01E6   00A8               M         MOVWF mac_src_2
+                      00798         SETF mac_src_3, 0x5E   ; <<<
+01E7   305E               M         MOVLW 0x5E
+01E8   00A9               M         MOVWF mac_src_3
+                      00799         SETF mac_src_4, 0x87   ; <<<
+01E9   3087               M         MOVLW 0x87
+01EA   00AA               M         MOVWF mac_src_4
+                      00800         SETF mac_src_5, 0x8E   ; <<<
+01EB   308E               M         MOVLW 0x8E
+01EC   00AB               M         MOVWF mac_src_5
+                      00801         SETF mac_type_0, 0x08
+01ED   3008               M         MOVLW 0x08
+01EE   00AC               M         MOVWF mac_type_0
+                      00802         SETF mac_type_1, 0x00
+01EF   3000               M         MOVLW 0x00
+01F0   00AD               M         MOVWF mac_type_1
+                      00803 
+                      00804         SETF ip_version_and_header_length, 0x45
+01F1   3045               M         MOVLW 0x45
+01F2   00AE               M         MOVWF ip_version_and_header_length
+                      00805         SETF ip_dummy, 0x00
+01F3   3000               M         MOVLW 0x00
+01F4   00AF               M         MOVWF ip_dummy
+                      00806         SETF ip_length_0, 0x02                   ; <<<
+MPASM  5.42                       PROG1_5.ASM   3-11-2012  23:49:31         PAGE 19
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+01F5   3002               M         MOVLW 0x02
+01F6   00B0               M         MOVWF ip_length_0
+                      00807         SETF ip_length_1, 0x1C                   ; <<< including IP and UDP header
+01F7   301C               M         MOVLW 0x1C
+01F8   00B1               M         MOVWF ip_length_1
+                      00808         SETF ip_packet_id_0, 0x00
+01F9   3000               M         MOVLW 0x00
+01FA   00B2               M         MOVWF ip_packet_id_0
+                      00809         SETF ip_packet_id_1, 0x00
+01FB   3000               M         MOVLW 0x00
+01FC   00B3               M         MOVWF ip_packet_id_1
+                      00810         SETF ip_flags_0, 0x40
+01FD   3040               M         MOVLW 0x40
+01FE   00B4               M         MOVWF ip_flags_0
+                      00811         SETF ip_flags_1, 0x00
+01FF   3000               M         MOVLW 0x00
+0200   00B5               M         MOVWF ip_flags_1
+                      00812         SETF ip_ttl, 0x40
+0201   3040               M         MOVLW 0x40
+0202   00B6               M         MOVWF ip_ttl
+                      00813         SETF ip_protocol, 0x11
+0203   3011               M         MOVLW 0x11
+0204   00B7               M         MOVWF ip_protocol
+                      00814         SETF ip_header_checksum_0, 0xB6          ; <<<
+0205   30B6               M         MOVLW 0xB6
+0206   00B8               M         MOVWF ip_header_checksum_0
+                      00815         SETF ip_header_checksum_1, 0xAB          ; <<< recalculate when changing headers!
+0207   30AB               M         MOVLW 0xAB
+0208   00B9               M         MOVWF ip_header_checksum_1
+                      00816         SETF ip_src_0, 0xC0
+0209   30C0               M         MOVLW 0xC0
+020A   00BA               M         MOVWF ip_src_0
+                      00817         SETF ip_src_1, 0xA8
+020B   30A8               M         MOVLW 0xA8
+020C   00BB               M         MOVWF ip_src_1
+                      00818         SETF ip_src_2, 0x00
+020D   3000               M         MOVLW 0x00
+020E   00BC               M         MOVWF ip_src_2
+                      00819         SETF ip_src_3, 0xC9
+020F   30C9               M         MOVLW 0xC9
+0210   00BD               M         MOVWF ip_src_3
+                      00820         SETF ip_dest_0, 0xC0
+0211   30C0               M         MOVLW 0xC0
+0212   00BE               M         MOVWF ip_dest_0
+                      00821         SETF ip_dest_1, 0xA8
+0213   30A8               M         MOVLW 0xA8
+0214   00BF               M         MOVWF ip_dest_1
+                      00822         SETF ip_dest_2, 0x00
+0215   3000               M         MOVLW 0x00
+0216   00C0               M         MOVWF ip_dest_2
+                      00823         SETF ip_dest_3, 0x0C
+0217   300C               M         MOVLW 0x0C
+0218   00C1               M         MOVWF ip_dest_3
+MPASM  5.42                       PROG1_5.ASM   3-11-2012  23:49:31         PAGE 20
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00824 
+                      00825         SETF udp_src_port_0, 0x18
+0219   3018               M         MOVLW 0x18
+021A   00C2               M         MOVWF udp_src_port_0
+                      00826         SETF udp_src_port_1, 0xF7
+021B   30F7               M         MOVLW 0xF7
+021C   00C3               M         MOVWF udp_src_port_1
+                      00827         SETF udp_dest_port_0, 0x18
+021D   3018               M         MOVLW 0x18
+021E   00C4               M         MOVWF udp_dest_port_0
+                      00828         SETF udp_dest_port_1, 0xF8
+021F   30F8               M         MOVLW 0xF8
+0220   00C5               M         MOVWF udp_dest_port_1
+                      00829         SETF udp_length_0, 0x02    ; <<<
+0221   3002               M         MOVLW 0x02
+0222   00C6               M         MOVWF udp_length_0
+                      00830         SETF udp_length_1, 0x08    ; <<< including UDP header
+0223   3008               M         MOVLW 0x08
+0224   00C7               M         MOVWF udp_length_1
+                      00831         SETF udp_checksum_0, 0x00  ; (ignored)
+0225   3000               M         MOVLW 0x00
+0226   00C8               M         MOVWF udp_checksum_0
+                      00832         SETF udp_checksum_1, 0x00  ; (ignored)
+0227   3000               M         MOVLW 0x00
+0228   00C9               M         MOVWF udp_checksum_1
+                      00833 
+                      00834         SETF magic, 0x65           ; "e"
+0229   3065               M         MOVLW 0x65
+022A   00CA               M         MOVWF magic
+                      00835         SETF eth_packet_type, 0x01 ; memory dump
+022B   3001               M         MOVLW 0x01
+022C   00CB               M         MOVWF eth_packet_type
+                      00836 
+                      00837         SETF version, 0x01
+022D   3001               M         MOVLW 0x01
+022E   00CC               M         MOVWF version
+                      00838         SETF panic_bits, 0x00
+022F   3000               M         MOVLW 0x00
+0230   00F9               M         MOVWF panic_bits
+0231   0008           00839         RETURN
+                      00840 
+                      00841 ;init_interrupts
+                      00842 ;       BANKSEL PORTA ; BANK0
+                      00843 ;
+                      00844 ;       BSF INTCON, INTE ; RB0 interrupt
+                      00845 ;       BSF INTCON, RBIE ; PORTB change
+                      00846 ;       BSF INTCON, GIE
+                      00847 ;
+                      00848 ;       RETURN
+                      00849 
+0232                  00850 init
+0232   1683 1303      00851         BANKSEL TRISA  ; BANK1
+                      00852         SETF TRISA, b'00000000'
+MPASM  5.42                       PROG1_5.ASM   3-11-2012  23:49:31         PAGE 21
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0234   3000               M         MOVLW b'00000000'
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0235   0085               M         MOVWF TRISA
+                      00853         SETF TRISB, b'00000000'
+0236   3000               M         MOVLW b'00000000'
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0237   0086               M         MOVWF TRISB
+                      00854         SETF TRISC, b'00010000'
+0238   3010               M         MOVLW b'00010000'
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0239   0087               M         MOVWF TRISC
+                      00855         SETF TRISD, b'00000010'
+023A   3002               M         MOVLW b'00000010'
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+023B   0088               M         MOVWF TRISD
+                      00856         SETF TRISE, b'00000000'
+023C   3000               M         MOVLW b'00000000'
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+023D   0089               M         MOVWF TRISE
+                      00857 
+023E   1283 1303      00858         BANKSEL PORTA  ; BANK0
+0240   0185           00859         CLRF PORTA
+0241   0186           00860         CLRF PORTB
+0242   0187           00861         CLRF PORTC
+0243   0188           00862         CLRF PORTD
+0244   0189           00863         CLRF PORTE
+                      00864 
+0245   21BC           00865         CALL led_status_red
+                      00866 
+0246   2001           00867         CALL wait_long
+                      00868         
+0247   21D5           00869         CALL init_vars
+0248   200F           00870         CALL spi_init
+0249   206B           00871         CALL eth_init
+024A   21A4           00872         CALL timer_init
+                      00873 ;       CALL init_interrupts
+                      00874 
+                      00875 ;       CALL eth_leds_on
+024B   0008           00876         RETURN
+                      00877 
+024C                  00878 measure_input_1
+024C   0008           00879         RETURN
+                      00880 
+024D                  00881 measure_input_2
+024D   0008           00882         RETURN
+                      00883 
+024E                  00884 select_thermo_1
+                      00885         SETF ow_current_device_0, 0x10
+024E   3010               M         MOVLW 0x10
+024F   00E6               M         MOVWF ow_current_device_0
+                      00886         SETF ow_current_device_1, 0x13
+0250   3013               M         MOVLW 0x13
+0251   00E7               M         MOVWF ow_current_device_1
+MPASM  5.42                       PROG1_5.ASM   3-11-2012  23:49:31         PAGE 22
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00887         SETF ow_current_device_2, 0xC1
+0252   30C1               M         MOVLW 0xC1
+0253   00E8               M         MOVWF ow_current_device_2
+                      00888         SETF ow_current_device_3, 0xF5
+0254   30F5               M         MOVLW 0xF5
+0255   00E9               M         MOVWF ow_current_device_3
+                      00889         SETF ow_current_device_4, 0x01
+0256   3001               M         MOVLW 0x01
+0257   00EA               M         MOVWF ow_current_device_4
+                      00890         SETF ow_current_device_5, 0x08
+0258   3008               M         MOVLW 0x08
+0259   00EB               M         MOVWF ow_current_device_5
+                      00891         SETF ow_current_device_6, 0x00
+025A   3000               M         MOVLW 0x00
+025B   00EC               M         MOVWF ow_current_device_6
+                      00892         SETF ow_current_device_7, 0x3B
+025C   303B               M         MOVLW 0x3B
+025D   00ED               M         MOVWF ow_current_device_7
+025E   0008           00893         RETURN
+                      00894 
+025F                  00895 select_thermo_2
+                      00896         SETF ow_current_device_0, 0x10
+025F   3010               M         MOVLW 0x10
+0260   00E6               M         MOVWF ow_current_device_0
+                      00897         SETF ow_current_device_1, 0x33
+0261   3033               M         MOVLW 0x33
+0262   00E7               M         MOVWF ow_current_device_1
+                      00898         SETF ow_current_device_2, 0x9D
+0263   309D               M         MOVLW 0x9D
+0264   00E8               M         MOVWF ow_current_device_2
+                      00899         SETF ow_current_device_3, 0xF5
+0265   30F5               M         MOVLW 0xF5
+0266   00E9               M         MOVWF ow_current_device_3
+                      00900         SETF ow_current_device_4, 0x01
+0267   3001               M         MOVLW 0x01
+0268   00EA               M         MOVWF ow_current_device_4
+                      00901         SETF ow_current_device_5, 0x08
+0269   3008               M         MOVLW 0x08
+026A   00EB               M         MOVWF ow_current_device_5
+                      00902         SETF ow_current_device_6, 0x00
+026B   3000               M         MOVLW 0x00
+026C   00EC               M         MOVWF ow_current_device_6
+                      00903         SETF ow_current_device_7, 0x39
+026D   3039               M         MOVLW 0x39
+026E   00ED               M         MOVWF ow_current_device_7
+026F   0008           00904         RETURN
+                      00905 
+0270                  00906 select_thermo_3
+                      00907         SETF ow_current_device_0, 0x10
+0270   3010               M         MOVLW 0x10
+0271   00E6               M         MOVWF ow_current_device_0
+                      00908         SETF ow_current_device_1, 0x79
+0272   3079               M         MOVLW 0x79
+MPASM  5.42                       PROG1_5.ASM   3-11-2012  23:49:31         PAGE 23
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0273   00E7               M         MOVWF ow_current_device_1
+                      00909         SETF ow_current_device_2, 0x94
+0274   3094               M         MOVLW 0x94
+0275   00E8               M         MOVWF ow_current_device_2
+                      00910         SETF ow_current_device_3, 0xF5
+0276   30F5               M         MOVLW 0xF5
+0277   00E9               M         MOVWF ow_current_device_3
+                      00911         SETF ow_current_device_4, 0x01
+0278   3001               M         MOVLW 0x01
+0279   00EA               M         MOVWF ow_current_device_4
+                      00912         SETF ow_current_device_5, 0x08
+027A   3008               M         MOVLW 0x08
+027B   00EB               M         MOVWF ow_current_device_5
+                      00913         SETF ow_current_device_6, 0x00
+027C   3000               M         MOVLW 0x00
+027D   00EC               M         MOVWF ow_current_device_6
+                      00914         SETF ow_current_device_7, 0x70
+027E   3070               M         MOVLW 0x70
+027F   00ED               M         MOVWF ow_current_device_7
+0280   0008           00915         RETURN
+                      00916 
+0281                  00917 select_thermo_4
+                      00918         SETF ow_current_device_0, 0x10
+0281   3010               M         MOVLW 0x10
+0282   00E6               M         MOVWF ow_current_device_0
+                      00919         SETF ow_current_device_1, 0xF7
+0283   30F7               M         MOVLW 0xF7
+0284   00E7               M         MOVWF ow_current_device_1
+                      00920         SETF ow_current_device_2, 0x97
+0285   3097               M         MOVLW 0x97
+0286   00E8               M         MOVWF ow_current_device_2
+                      00921         SETF ow_current_device_3, 0xF5
+0287   30F5               M         MOVLW 0xF5
+0288   00E9               M         MOVWF ow_current_device_3
+                      00922         SETF ow_current_device_4, 0x01
+0289   3001               M         MOVLW 0x01
+028A   00EA               M         MOVWF ow_current_device_4
+                      00923         SETF ow_current_device_5, 0x08
+028B   3008               M         MOVLW 0x08
+028C   00EB               M         MOVWF ow_current_device_5
+                      00924         SETF ow_current_device_6, 0x00
+028D   3000               M         MOVLW 0x00
+028E   00EC               M         MOVWF ow_current_device_6
+                      00925         SETF ow_current_device_7, 0xC7
+028F   30C7               M         MOVLW 0xC7
+0290   00ED               M         MOVWF ow_current_device_7
+0291   0008           00926         RETURN
+                      00927 
+0292                  00928 store_thermo_1
+                      00929         MOVFF thermo2_value, thermo_in_lsb
+0292   086F               M         MOVF thermo_in_lsb, W
+0293   00F3               M         MOVWF thermo2_value
+                      00930         MOVFF thermo2_value_fract, thermo_in_xsb
+MPASM  5.42                       PROG1_5.ASM   3-11-2012  23:49:31         PAGE 24
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0294   0870               M         MOVF thermo_in_xsb, W
+0295   00F4               M         MOVWF thermo2_value_fract
+0296   0008           00931         RETURN
+                      00932 
+0297                  00933 store_thermo_2
+                      00934         MOVFF thermo2_value, thermo_in_lsb
+0297   086F               M         MOVF thermo_in_lsb, W
+0298   00F3               M         MOVWF thermo2_value
+                      00935         MOVFF thermo2_value_fract, thermo_in_xsb
+0299   0870               M         MOVF thermo_in_xsb, W
+029A   00F4               M         MOVWF thermo2_value_fract
+029B   0008           00936         RETURN
+                      00937 
+029C                  00938 store_thermo_3
+                      00939         MOVFF thermo3_value, thermo_in_lsb
+029C   086F               M         MOVF thermo_in_lsb, W
+029D   00F5               M         MOVWF thermo3_value
+                      00940         MOVFF thermo3_value_fract, thermo_in_xsb
+029E   0870               M         MOVF thermo_in_xsb, W
+029F   00F6               M         MOVWF thermo3_value_fract
+02A0   0008           00941         RETURN
+                      00942 
+02A1                  00943 store_thermo_4
+                      00944         MOVFF thermo4_value, thermo_in_lsb
+02A1   086F               M         MOVF thermo_in_lsb, W
+02A2   00F7               M         MOVWF thermo4_value
+                      00945         MOVFF thermo4_value_fract, thermo_in_xsb
+02A3   0870               M         MOVF thermo_in_xsb, W
+02A4   00F8               M         MOVWF thermo4_value_fract
+02A5   0008           00946         RETURN
+                      00947 
+02A6                  00948 show_charge_led_0
+02A6   21CB           00949         CALL led_charge_yellow
+02A7   0008           00950         RETURN
+                      00951 
+02A8                  00952 show_charge_led_1
+02A8   21D0           00953         CALL led_charge_green
+02A9   0008           00954         RETURN
+                      00955 
+02AA                  00956 show_charge_led_2
+02AA   21D0           00957         CALL led_charge_green
+02AB   0008           00958         RETURN
+                      00959 
+02AC                  00960 show_charge_led_3
+02AC   21D0           00961         CALL led_charge_green
+02AD   0008           00962         RETURN
+                      00963 
+02AE                  00964 show_charge_led_4
+02AE   21CB           00965         CALL led_charge_yellow
+02AF   0008           00966         RETURN
+                      00967 
+02B0                  00968 panic
+02B0                  00969 panic_loop
+MPASM  5.42                       PROG1_5.ASM   3-11-2012  23:49:31         PAGE 25
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+02B0   1283 1303      00970         BANKSEL PORTA ; BANK0
+02B2   1208           00971         BCF PORTD, 4
+02B3   1688           00972         BSF PORTD, 5
+02B4   1308           00973         BCF PORTD, 6
+02B5   1788           00974         BSF PORTD, 7
+02B6   2001           00975         CALL wait_long
+02B7   1608           00976         BSF PORTD, 4
+02B8   1288           00977         BCF PORTD, 5
+02B9   1708           00978         BSF PORTD, 6
+02BA   1388           00979         BCF PORTD, 7
+02BB   2001           00980         CALL wait_long
+02BC   2AB0           00981         GOTO panic_loop
+                      00982 
+02BD                  00983 panic_check
+02BD   30FF           00984         MOVLW 0xFF
+02BE   0779           00985         ADDWF panic_bits, W
+02BF   1803           00986         BTFSC STATUS, C
+02C0   22B0           00987         CALL panic
+02C1   0008           00988         RETURN
+                      00989 
+                      00990 ;handle_interrupt
+                      00991 ;       BANKSEL PORTA ; BANK0
+                      00992 ;       MOVLW 0xff
+                      00993 ;       XORWF PORTA, F
+                      00994 ;       BCF INTCON, INTF
+                      00995 ;       BCF INTCON, RBIF
+                      00996 ;       RETFIE
+                      00997 ;
+                      00998 ;       BSF interrupts, 1
+                      00999 ;       RETFIE
+                      01000 
+02C2                  01001 do_temperature_check
+02C2   301F           01002         MOVLW 0x1F ; 27 'C
+02C3   0273           01003         SUBWF thermo2_value, W
+02C4   00CD           01004         MOVWF eee
+02C5   1079           01005         BCF panic_bits, 0 ; temperature
+02C6   1803           01006         BTFSC STATUS, C
+02C7   1479           01007         BSF panic_bits, 0 ; temperature
+02C8   0008           01008         RETURN
+                      01009 
+02C9                  01010 wfi_main
+02C9   0008           01011         RETURN
+                      01012 
+                      01013 ; WFI = wait for interrupt
+02CA                  01014 wfi_loop
+02CA   00D2           01015         MOVWF wfi_loops_left
+                      01016 
+02CB   21C1           01017         CALL led_status_green
+                      01018 
+02CC                  01019 wfi_loop_1
+02CC   22C9           01020         CALL wfi_main
+                      01021 
+02CD   1283 1303      01022         BANKSEL PORTA ; BANK0
+MPASM  5.42                       PROG1_5.ASM   3-11-2012  23:49:31         PAGE 26
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+02CF   1888           01023         BTFSC PORTD, 1
+02D0   2ACC           01024         GOTO wfi_loop_1
+                      01025 
+02D1                  01026 wfi_loop_2
+02D1   22C9           01027         CALL wfi_main
+                      01028 
+02D2   1283 1303      01029         BANKSEL PORTA ; BANK0
+02D4   1C88           01030         BTFSS PORTD, 1
+02D5   2AD1           01031         GOTO wfi_loop_2
+                      01032 
+02D6   21B6           01033         CALL timer_interrupt_caught
+02D7   0BD2           01034         DECFSZ wfi_loops_left, F
+02D8   2ACC           01035         GOTO wfi_loop_1
+                      01036 
+02D9   21BC           01037         CALL led_status_red
+02DA   0008           01038         RETURN
+                      01039 
+02DB                  01040 main
+02DB   2232           01041         CALL init
+                      01042 
+02DC                  01043 main_loop
+                      01044         WFI_MACRO 0x04             ; 1.00 seconds passed in total
+02DC   3004               M         MOVLW 0x04
+02DD   22CA               M         CALL wfi_loop
+                      01045 
+02DE   224E           01046         CALL select_thermo_1
+02DF   2186           01047         CALL thermo_measure_begin
+                      01048         WFI_MACRO 0x04             ; 2.00 seconds passed in total
+02E0   3004               M         MOVLW 0x04
+02E1   22CA               M         CALL wfi_loop
+                      01049 
+02E2   218B           01050         CALL thermo_measure_end
+02E3   218D           01051         CALL thermo_read
+02E4   2292           01052         CALL store_thermo_1
+                      01053         WFI_MACRO 0x04             ; 3.00 seconds passed in total
+02E5   3004               M         MOVLW 0x04
+02E6   22CA               M         CALL wfi_loop
+                      01054 
+02E7   225F           01055         CALL select_thermo_2
+02E8   2186           01056         CALL thermo_measure_begin
+                      01057         WFI_MACRO 0x04             ; 4.00 seconds passed in total
+02E9   3004               M         MOVLW 0x04
+02EA   22CA               M         CALL wfi_loop
+                      01058 
+02EB   218B           01059         CALL thermo_measure_end
+02EC   218D           01060         CALL thermo_read
+02ED   2297           01061         CALL store_thermo_2
+                      01062         WFI_MACRO 0x04             ; 5.00 seconds passed in total
+02EE   3004               M         MOVLW 0x04
+02EF   22CA               M         CALL wfi_loop
+                      01063 
+02F0   2281           01064         CALL select_thermo_4
+02F1   2186           01065         CALL thermo_measure_begin
+MPASM  5.42                       PROG1_5.ASM   3-11-2012  23:49:31         PAGE 27
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      01066         WFI_MACRO 0x04             ; 6.00 seconds passed in total
+02F2   3004               M         MOVLW 0x04
+02F3   22CA               M         CALL wfi_loop
+                      01067 
+02F4   218B           01068         CALL thermo_measure_end
+02F5   218D           01069         CALL thermo_read
+02F6   22A1           01070         CALL store_thermo_4
+                      01071         WFI_MACRO 0x04             ; 7.00 seconds passed in total
+02F7   3004               M         MOVLW 0x04
+02F8   22CA               M         CALL wfi_loop
+                      01072 
+02F9   22A6           01073         CALL show_charge_led_0
+                      01074         WFI_MACRO 0x03             ; 7.75 seconds passed in total
+02FA   3003               M         MOVLW 0x03
+02FB   22CA               M         CALL wfi_loop
+                      01075 
+02FC   21C6           01076         CALL led_charge_off
+                      01077         WFI_MACRO 0x01             ; 8.00 seconds passed in total
+02FD   3001               M         MOVLW 0x01
+02FE   22CA               M         CALL wfi_loop
+                      01078 
+02FF   22A8           01079         CALL show_charge_led_1
+                      01080         WFI_MACRO 0x01             ; 8.25 seconds passed in total
+0300   3001               M         MOVLW 0x01
+0301   22CA               M         CALL wfi_loop
+                      01081 
+0302   21C6           01082         CALL led_charge_off
+                      01083         WFI_MACRO 0x01             ; 8.50 seconds passed in total
+0303   3001               M         MOVLW 0x01
+0304   22CA               M         CALL wfi_loop
+                      01084 
+0305   22AA           01085         CALL show_charge_led_2
+                      01086         WFI_MACRO 0x01             ; 8.75 seconds passed in total
+0306   3001               M         MOVLW 0x01
+0307   22CA               M         CALL wfi_loop
+                      01087 
+0308   21C6           01088         CALL led_charge_off
+                      01089         WFI_MACRO 0x01             ; 9.00 seconds passed in total
+0309   3001               M         MOVLW 0x01
+030A   22CA               M         CALL wfi_loop
+                      01090 
+030B   22AC           01091         CALL show_charge_led_3
+                      01092         WFI_MACRO 0x01             ; 9.25 seconds passed in total
+030C   3001               M         MOVLW 0x01
+030D   22CA               M         CALL wfi_loop
+                      01093 
+030E   21C6           01094         CALL led_charge_off
+                      01095         WFI_MACRO 0x01             ; 9.50 seconds passed in total
+030F   3001               M         MOVLW 0x01
+0310   22CA               M         CALL wfi_loop
+                      01096 
+0311   22AE           01097         CALL show_charge_led_4
+                      01098         WFI_MACRO 0x01             ; 9.75 seconds passed in total
+MPASM  5.42                       PROG1_5.ASM   3-11-2012  23:49:31         PAGE 28
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0312   3001               M         MOVLW 0x01
+0313   22CA               M         CALL wfi_loop
+                      01099 
+0314   21C6           01100         CALL led_charge_off
+                      01101         WFI_MACRO 0x01             ; 10.00 seconds passed in total
+0315   3001               M         MOVLW 0x01
+0316   22CA               M         CALL wfi_loop
+                      01102 
+0317   22C2           01103         CALL do_temperature_check
+                      01104         WFI_MACRO 0x04             ; 11.00 seconds passed in total
+0318   3004               M         MOVLW 0x04
+0319   22CA               M         CALL wfi_loop
+                      01105 
+031A   20B0           01106         CALL eth_send_packet
+                      01107         WFI_MACRO 0x04             ; 12.00 seconds passed in total
+031B   3004               M         MOVLW 0x04
+031C   22CA               M         CALL wfi_loop
+                      01108 
+031D   22BD           01109         CALL panic_check
+                      01110         WFI_MACRO 0x0C             ; 15.00 seconds passed in total
+031E   300C               M         MOVLW 0x0C
+031F   22CA               M         CALL wfi_loop
+                      01111 
+0320   2ADC           01112         GOTO main_loop
+                      01113 
+                      01114         END
+MPASM  5.42                       PROG1_5.ASM   3-11-2012  23:49:31         PAGE 29
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+ACKDT                             00000005
+ACKEN                             00000004
+ACKSTAT                           00000006
+ADCON0                            0000001F
+ADCON1                            0000009F
+ADCS0                             00000006
+ADCS1                             00000007
+ADCS2                             00000006
+ADDEN                             00000003
+ADFM                              00000007
+ADIE                              00000006
+ADIF                              00000006
+ADON                              00000000
+ADRESH                            0000001E
+ADRESL                            0000009E
+BCLIE                             00000003
+BCLIF                             00000003
+BF                                00000000
+BRGH                              00000002
+C                                 00000000
+C1INV                             00000004
+C1OUT                             00000006
+C2INV                             00000005
+C2OUT                             00000007
+CCP1CON                           00000017
+CCP1IE                            00000002
+CCP1IF                            00000002
+CCP1M0                            00000000
+CCP1M1                            00000001
+CCP1M2                            00000002
+CCP1M3                            00000003
+CCP1X                             00000005
+CCP1Y                             00000004
+CCP2CON                           0000001D
+CCP2IE                            00000000
+CCP2IF                            00000000
+CCP2M0                            00000000
+CCP2M1                            00000001
+CCP2M2                            00000002
+CCP2M3                            00000003
+CCP2X                             00000005
+CCP2Y                             00000004
+CCPR1                             00000015
+CCPR1H                            00000016
+CCPR1L                            00000015
+CCPR2                             0000001B
+CCPR2H                            0000001C
+CCPR2L                            0000001B
+CHS0                              00000003
+CHS1                              00000004
+CHS2                              00000005
+CIS                               00000003
+CKE                               00000006
+MPASM  5.42                       PROG1_5.ASM   3-11-2012  23:49:31         PAGE 30
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+CKP                               00000004
+CM0                               00000000
+CM1                               00000001
+CM2                               00000002
+CMCON                             0000009C
+CMIE                              00000006
+CMIF                              00000006
+CREN                              00000004
+CSRC                              00000007
+CVR0                              00000000
+CVR1                              00000001
+CVR2                              00000002
+CVR3                              00000003
+CVRCON                            0000009D
+CVREN                             00000007
+CVROE                             00000006
+CVRR                              00000005
+D                                 00000005
+DATA_ADDRESS                      00000005
+DC                                00000001
+D_A                               00000005
+D_NOT_A                           00000005
+EEADR                             0000010D
+EEADRH                            0000010F
+EECON1                            0000018C
+EECON2                            0000018D
+EEDATA                            0000010C
+EEDATH                            0000010E
+EEIE                              00000004
+EEIF                              00000004
+EEPGD                             00000007
+F                                 00000001
+FERR                              00000002
+FSR                               00000004
+GCEN                              00000007
+GIE                               00000007
+GO                                00000002
+GO_DONE                           00000002
+GO_NOT_DONE                       00000002
+I2C_DATA                          00000005
+I2C_READ                          00000002
+I2C_START                         00000003
+I2C_STOP                          00000004
+IBF                               00000007
+IBOV                              00000005
+INDF                              00000000
+INTCON                            0000000B
+INTE                              00000004
+INTEDG                            00000006
+INTF                              00000001
+IRP                               00000007
+MOVFF                             
+NOT_A                             00000005
+MPASM  5.42                       PROG1_5.ASM   3-11-2012  23:49:31         PAGE 31
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+NOT_ADDRESS                       00000005
+NOT_BO                            00000000
+NOT_BOR                           00000000
+NOT_DONE                          00000002
+NOT_PD                            00000003
+NOT_POR                           00000001
+NOT_RBPU                          00000007
+NOT_RC8                           00000006
+NOT_T1SYNC                        00000002
+NOT_TO                            00000004
+NOT_TX8                           00000006
+NOT_W                             00000002
+NOT_WRITE                         00000002
+OBF                               00000006
+OERR                              00000001
+OPTION_REG                        00000081
+OW_BIT                            00000007
+OW_HIZ                            
+OW_LO                             
+OW_PORT                           00000007
+OW_TRIS                           00000087
+OW_WAIT                           
+P                                 00000004
+PCFG0                             00000000
+PCFG1                             00000001
+PCFG2                             00000002
+PCFG3                             00000003
+PCL                               00000002
+PCLATH                            0000000A
+PCON                              0000008E
+PEIE                              00000006
+PEN                               00000002
+PIE1                              0000008C
+PIE2                              0000008D
+PIR1                              0000000C
+PIR2                              0000000D
+PORTA                             00000005
+PORTB                             00000006
+PORTC                             00000007
+PORTD                             00000008
+PORTE                             00000009
+PR2                               00000092
+PS0                               00000000
+PS1                               00000001
+PS2                               00000002
+PSA                               00000003
+PSPIE                             00000007
+PSPIF                             00000007
+PSPMODE                           00000004
+R                                 00000002
+RA0                               00000000
+RA1                               00000001
+RA2                               00000002
+MPASM  5.42                       PROG1_5.ASM   3-11-2012  23:49:31         PAGE 32
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+RA3                               00000003
+RA4                               00000004
+RA5                               00000005
+RB0                               00000000
+RB1                               00000001
+RB2                               00000002
+RB3                               00000003
+RB4                               00000004
+RB5                               00000005
+RB6                               00000006
+RB7                               00000007
+RBIE                              00000003
+RBIF                              00000000
+RC0                               00000000
+RC1                               00000001
+RC2                               00000002
+RC3                               00000003
+RC4                               00000004
+RC5                               00000005
+RC6                               00000006
+RC7                               00000007
+RC8_9                             00000006
+RC9                               00000006
+RCD8                              00000000
+RCEN                              00000003
+RCIE                              00000005
+RCIF                              00000005
+RCREG                             0000001A
+RCSTA                             00000018
+RD                                00000000
+RD0                               00000000
+RD1                               00000001
+RD2                               00000002
+RD3                               00000003
+RD4                               00000004
+RD5                               00000005
+RD6                               00000006
+RD7                               00000007
+RE0                               00000000
+RE1                               00000001
+RE2                               00000002
+READ_WRITE                        00000002
+RP0                               00000005
+RP1                               00000006
+RSEN                              00000001
+RX9                               00000006
+RX9D                              00000000
+R_NOT_W                           00000002
+R_W                               00000002
+S                                 00000003
+SEN                               00000000
+SETF                              
+SMP                               00000007
+MPASM  5.42                       PROG1_5.ASM   3-11-2012  23:49:31         PAGE 33
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+SPBRG                             00000099
+SPEN                              00000007
+SREN                              00000005
+SSPADD                            00000093
+SSPBUF                            00000013
+SSPCON                            00000014
+SSPCON2                           00000091
+SSPEN                             00000005
+SSPIE                             00000003
+SSPIF                             00000003
+SSPM0                             00000000
+SSPM1                             00000001
+SSPM2                             00000002
+SSPM3                             00000003
+SSPOV                             00000006
+SSPSTAT                           00000094
+STATUS                            00000003
+SYNC                              00000004
+T0CS                              00000005
+T0IE                              00000005
+T0IF                              00000002
+T0SE                              00000004
+T1CKPS0                           00000004
+T1CKPS1                           00000005
+T1CON                             00000010
+T1INSYNC                          00000002
+T1OSCEN                           00000003
+T1SYNC                            00000002
+T2CKPS0                           00000000
+T2CKPS1                           00000001
+T2CON                             00000012
+TIMER_BANK                        00000005
+TMR0                              00000001
+TMR0IE                            00000005
+TMR0IF                            00000002
+TMR1CS                            00000001
+TMR1H                             0000000F
+TMR1IE                            00000000
+TMR1IF                            00000000
+TMR1L                             0000000E
+TMR1ON                            00000000
+TMR2                              00000011
+TMR2IE                            00000001
+TMR2IF                            00000001
+TMR2ON                            00000002
+TOUTPS0                           00000003
+TOUTPS1                           00000004
+TOUTPS2                           00000005
+TOUTPS3                           00000006
+TRISA                             00000085
+TRISA0                            00000000
+TRISA1                            00000001
+TRISA2                            00000002
+MPASM  5.42                       PROG1_5.ASM   3-11-2012  23:49:31         PAGE 34
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+TRISA3                            00000003
+TRISA4                            00000004
+TRISA5                            00000005
+TRISB                             00000086
+TRISB0                            00000000
+TRISB1                            00000001
+TRISB2                            00000002
+TRISB3                            00000003
+TRISB4                            00000004
+TRISB5                            00000005
+TRISB6                            00000006
+TRISB7                            00000007
+TRISC                             00000087
+TRISC0                            00000000
+TRISC1                            00000001
+TRISC2                            00000002
+TRISC3                            00000003
+TRISC4                            00000004
+TRISC5                            00000005
+TRISC6                            00000006
+TRISC7                            00000007
+TRISD                             00000088
+TRISD0                            00000000
+TRISD1                            00000001
+TRISD2                            00000002
+TRISD3                            00000003
+TRISD4                            00000004
+TRISD5                            00000005
+TRISD6                            00000006
+TRISD7                            00000007
+TRISE                             00000089
+TRISE0                            00000000
+TRISE1                            00000001
+TRISE2                            00000002
+TRMT                              00000001
+TX8_9                             00000006
+TX9                               00000006
+TX9D                              00000000
+TXD8                              00000000
+TXEN                              00000005
+TXIE                              00000004
+TXIF                              00000004
+TXREG                             00000019
+TXSTA                             00000098
+UA                                00000001
+W                                 00000000
+WCOL                              00000007
+WFI_MACRO                         
+WR                                00000001
+WREN                              00000002
+WRERR                             00000003
+Z                                 00000002
+_BODEN_OFF                        00003FBF
+MPASM  5.42                       PROG1_5.ASM   3-11-2012  23:49:31         PAGE 35
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+_BODEN_ON                         00003FFF
+_CONFIG                           00002007
+_CPD_OFF                          00003FFF
+_CPD_ON                           00003EFF
+_CP_ALL                           00001FFF
+_CP_OFF                           00003FFF
+_DEBUG_OFF                        00003FFF
+_DEBUG_ON                         000037FF
+_DEVID1                           00002006
+_HS_OSC                           00003FFE
+_IDLOC0                           00002000
+_IDLOC1                           00002001
+_IDLOC2                           00002002
+_IDLOC3                           00002003
+_LP_OSC                           00003FFC
+_LVP_OFF                          00003F7F
+_LVP_ON                           00003FFF
+_PWRTE_OFF                        00003FFF
+_PWRTE_ON                         00003FF7
+_RC_OSC                           00003FFF
+_WDT_OFF                          00003FFB
+_WDT_ON                           00003FFF
+_WRT_1FOURTH                      00003BFF
+_WRT_256                          00003DFF
+_WRT_HALF                         000039FF
+_WRT_OFF                          00003FFF
+_XT_OSC                           00003FFD
+__16F877A                         00000001
+_spi_send_begin                   0000001B
+_spi_send_end                     00000038
+_spi_send_loop                    00000023
+_spi_send_memory                  0000001F
+_spi_send_wait                    00000030
+do_temperature_check              000002C2
+eee                               0000004D
+eth_init                          0000006B
+eth_packet_type                   0000004B
+eth_send_packet                   000000B0
+init                              00000232
+init_vars                         000001D5
+interrupts                        00000051
+ip_dest_0                         0000003E
+ip_dest_1                         0000003F
+ip_dest_2                         00000040
+ip_dest_3                         00000041
+ip_dummy                          0000002F
+ip_flags_0                        00000034
+ip_flags_1                        00000035
+ip_header_checksum_0              00000038
+ip_header_checksum_1              00000039
+ip_length_0                       00000030
+ip_length_1                       00000031
+ip_packet_id_0                    00000032
+MPASM  5.42                       PROG1_5.ASM   3-11-2012  23:49:31         PAGE 36
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+ip_packet_id_1                    00000033
+ip_protocol                       00000037
+ip_src_0                          0000003A
+ip_src_1                          0000003B
+ip_src_2                          0000003C
+ip_src_3                          0000003D
+ip_ttl                            00000036
+ip_version_and_header_length      0000002E
+led_charge_green                  000001D0
+led_charge_off                    000001C6
+led_charge_yellow                 000001CB
+led_status_green                  000001C1
+led_status_red                    000001BC
+mac_dest_0                        00000020
+mac_dest_1                        00000021
+mac_dest_2                        00000022
+mac_dest_3                        00000023
+mac_dest_4                        00000024
+mac_dest_5                        00000025
+mac_src_0                         00000026
+mac_src_1                         00000027
+mac_src_2                         00000028
+mac_src_3                         00000029
+mac_src_4                         0000002A
+mac_src_5                         0000002B
+mac_type_0                        0000002C
+mac_type_1                        0000002D
+magic                             0000004A
+main                              000002DB
+main_loop                         000002DC
+measure_input_1                   0000024C
+measure_input_2                   0000024D
+ow_bits_left                      00000064
+ow_buffer                         00000065
+ow_current_device_0               00000066
+ow_current_device_1               00000067
+ow_current_device_2               00000068
+ow_current_device_3               00000069
+ow_current_device_4               0000006A
+ow_current_device_5               0000006B
+ow_current_device_6               0000006C
+ow_current_device_7               0000006D
+ow_pd_byte                        00000063
+ow_receive_byte                   0000013D
+ow_receive_byte_loop              00000141
+ow_reset                          00000107
+ow_reset_and_select               0000015E
+ow_send_byte                      00000122
+ow_send_byte_loop                 00000127
+ow_strong_pullup_begin            000000F9
+ow_strong_pullup_end              000000FF
+panic                             000002B0
+panic_bits                        00000079
+MPASM  5.42                       PROG1_5.ASM   3-11-2012  23:49:31         PAGE 37
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+panic_check                       000002BD
+panic_loop                        000002B0
+select_thermo_1                   0000024E
+select_thermo_2                   0000025F
+select_thermo_3                   00000270
+select_thermo_4                   00000281
+show_charge_led_0                 000002A6
+show_charge_led_1                 000002A8
+show_charge_led_2                 000002AA
+show_charge_led_3                 000002AC
+show_charge_led_4                 000002AE
+sleep_0                           0000004E
+sleep_1                           0000004F
+sleep_2                           00000050
+spi_device_id                     00000058
+spi_init                          0000000F
+spi_memory_bank                   0000007F
+spi_memory_start                  00000062
+spi_out_0                         0000005A
+spi_out_1                         0000005B
+spi_out_2                         0000005C
+spi_out_3                         0000005D
+spi_out_4                         0000005E
+spi_out_5                         0000005F
+spi_out_6                         00000060
+spi_out_7                         00000061
+spi_out_length                    00000059
+spi_send                          0000003A
+spi_send_and_dump                 00000042
+store_thermo_1                    00000292
+store_thermo_2                    00000297
+store_thermo_3                    0000029C
+store_thermo_4                    000002A1
+thermo1_value                     00000071
+thermo1_value_fract               00000072
+thermo2_value                     00000073
+thermo2_value_fract               00000074
+thermo3_value                     00000075
+thermo3_value_fract               00000076
+thermo4_value                     00000077
+thermo4_value_fract               00000078
+thermo_detect_one_device          00000172
+thermo_in_lsb                     0000006F
+thermo_in_msb                     0000006E
+thermo_in_xsb                     00000070
+thermo_measure_begin              00000186
+thermo_measure_end                0000018B
+thermo_read                       0000018D
+thermo_read_1                     000001A3
+timer_increase_second             000001AC
+timer_init                        000001A4
+timer_interrupt_caught            000001B6
+timer_interrupts                  00000057
+MPASM  5.42                       PROG1_5.ASM   3-11-2012  23:49:31         PAGE 38
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+timer_time_0                      00000053
+timer_time_1                      00000054
+timer_time_2                      00000055
+timer_time_3                      00000056
+udp_checksum_0                    00000048
+udp_checksum_1                    00000049
+udp_dest_port_0                   00000044
+udp_dest_port_1                   00000045
+udp_length_0                      00000046
+udp_length_1                      00000047
+udp_src_port_0                    00000042
+udp_src_port_1                    00000043
+version                           0000004C
+wait_5us                          0000000A
+wait_long                         00000001
+wait_long_loop1                   00000003
+wait_long_loop2                   00000005
+wfi_loop                          000002CA
+wfi_loop_1                        000002CC
+wfi_loop_2                        000002D1
+wfi_loops_left                    00000052
+wfi_main                          000002C9
+
+
+MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
+
+0000 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0040 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0080 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+00C0 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0100 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0140 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0180 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+01C0 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0200 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0240 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0280 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+02C0 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX
+0300 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX X--------------- ----------------
+
+All other memory blocks unused.
+
+Program Memory Words Used:   801
+Program Memory Words Free:  7391
+
+
+Errors   :     0
+Warnings :     0 reported,     0 suppressed
+Messages :    13 reported,     0 suppressed
+
+

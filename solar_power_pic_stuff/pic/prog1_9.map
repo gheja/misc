@@ -1,0 +1,166 @@
+MPLINK 4.40, Linker
+Linker Map File - Created Tue Apr 24 22:50:31 2012
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000706
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000382      
+            899 out of 8454 program addresses used, program memory utilization is 10%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+          _spi_send_begin   0x00002f    program     static W:\solapowa\pic\prog1_9.asm
+            _spi_send_end   0x00004f    program     static W:\solapowa\pic\prog1_9.asm
+           _spi_send_loop   0x000038    program     static W:\solapowa\pic\prog1_9.asm
+         _spi_send_memory   0x000034    program     static W:\solapowa\pic\prog1_9.asm
+           _spi_send_wait   0x000045    program     static W:\solapowa\pic\prog1_9.asm
+     do_temperature_check   0x00031b    program     static W:\solapowa\pic\prog1_9.asm
+                 eth_init   0x00008b    program     static W:\solapowa\pic\prog1_9.asm
+          eth_send_packet   0x0000d0    program     static W:\solapowa\pic\prog1_9.asm
+                     init   0x00028d    program     static W:\solapowa\pic\prog1_9.asm
+                init_vars   0x000230    program     static W:\solapowa\pic\prog1_9.asm
+                led_green   0x000226    program     static W:\solapowa\pic\prog1_9.asm
+                  led_off   0x00021c    program     static W:\solapowa\pic\prog1_9.asm
+                  led_red   0x000221    program     static W:\solapowa\pic\prog1_9.asm
+               led_yellow   0x00022b    program     static W:\solapowa\pic\prog1_9.asm
+                     main   0x000330    program     static W:\solapowa\pic\prog1_9.asm
+                main_loop   0x000332    program     static W:\solapowa\pic\prog1_9.asm
+              measure_an4   0x00020b    program     static W:\solapowa\pic\prog1_9.asm
+             measure_init   0x0001fb    program     static W:\solapowa\pic\prog1_9.asm
+             measure_wait   0x000206    program     static W:\solapowa\pic\prog1_9.asm
+                 mem_init   0x000127    program     static W:\solapowa\pic\prog1_9.asm
+                 mem_read   0x00011b    program     static W:\solapowa\pic\prog1_9.asm
+          ow_receive_byte   0x00017c    program     static W:\solapowa\pic\prog1_9.asm
+     ow_receive_byte_loop   0x000180    program     static W:\solapowa\pic\prog1_9.asm
+                 ow_reset   0x000146    program     static W:\solapowa\pic\prog1_9.asm
+      ow_reset_and_select   0x00019d    program     static W:\solapowa\pic\prog1_9.asm
+             ow_send_byte   0x000161    program     static W:\solapowa\pic\prog1_9.asm
+        ow_send_byte_loop   0x000166    program     static W:\solapowa\pic\prog1_9.asm
+   ow_strong_pullup_begin   0x000138    program     static W:\solapowa\pic\prog1_9.asm
+     ow_strong_pullup_end   0x00013e    program     static W:\solapowa\pic\prog1_9.asm
+                    panic   0x00030d    program     static W:\solapowa\pic\prog1_9.asm
+              panic_check   0x00031a    program     static W:\solapowa\pic\prog1_9.asm
+               panic_loop   0x00030d    program     static W:\solapowa\pic\prog1_9.asm
+          select_thermo_1   0x0002ab    program     static W:\solapowa\pic\prog1_9.asm
+          select_thermo_2   0x0002bc    program     static W:\solapowa\pic\prog1_9.asm
+          select_thermo_3   0x0002cd    program     static W:\solapowa\pic\prog1_9.asm
+          select_thermo_4   0x0002de    program     static W:\solapowa\pic\prog1_9.asm
+        show_charge_led_0   0x000303    program     static W:\solapowa\pic\prog1_9.asm
+        show_charge_led_1   0x000305    program     static W:\solapowa\pic\prog1_9.asm
+        show_charge_led_2   0x000307    program     static W:\solapowa\pic\prog1_9.asm
+        show_charge_led_3   0x000309    program     static W:\solapowa\pic\prog1_9.asm
+        show_charge_led_4   0x00030b    program     static W:\solapowa\pic\prog1_9.asm
+                 spi_init   0x00001c    program     static W:\solapowa\pic\prog1_9.asm
+                 spi_send   0x000054    program     static W:\solapowa\pic\prog1_9.asm
+        spi_send_and_dump   0x00005c    program     static W:\solapowa\pic\prog1_9.asm
+           store_thermo_1   0x0002ef    program     static W:\solapowa\pic\prog1_9.asm
+           store_thermo_2   0x0002f4    program     static W:\solapowa\pic\prog1_9.asm
+           store_thermo_3   0x0002f9    program     static W:\solapowa\pic\prog1_9.asm
+           store_thermo_4   0x0002fe    program     static W:\solapowa\pic\prog1_9.asm
+ thermo_detect_one_device   0x0001b1    program     static W:\solapowa\pic\prog1_9.asm
+     thermo_measure_begin   0x0001c5    program     static W:\solapowa\pic\prog1_9.asm
+       thermo_measure_end   0x0001ca    program     static W:\solapowa\pic\prog1_9.asm
+              thermo_read   0x0001cc    program     static W:\solapowa\pic\prog1_9.asm
+            thermo_read_1   0x0001e2    program     static W:\solapowa\pic\prog1_9.asm
+    timer_increase_second   0x0001eb    program     static W:\solapowa\pic\prog1_9.asm
+               timer_init   0x0001e3    program     static W:\solapowa\pic\prog1_9.asm
+   timer_interrupt_caught   0x0001f5    program     static W:\solapowa\pic\prog1_9.asm
+                 wait_5us   0x000017    program     static W:\solapowa\pic\prog1_9.asm
+                wait_long   0x000001    program     static W:\solapowa\pic\prog1_9.asm
+          wait_long_loop1   0x000003    program     static W:\solapowa\pic\prog1_9.asm
+          wait_long_loop2   0x000005    program     static W:\solapowa\pic\prog1_9.asm
+              wait_longer   0x00000a    program     static W:\solapowa\pic\prog1_9.asm
+        wait_longer_loop1   0x00000c    program     static W:\solapowa\pic\prog1_9.asm
+        wait_longer_loop2   0x00000e    program     static W:\solapowa\pic\prog1_9.asm
+        wait_longer_loop3   0x000010    program     static W:\solapowa\pic\prog1_9.asm
+                 wfi_loop   0x000321    program     static W:\solapowa\pic\prog1_9.asm
+               wfi_loop_1   0x000322    program     static W:\solapowa\pic\prog1_9.asm
+               wfi_loop_2   0x000327    program     static W:\solapowa\pic\prog1_9.asm
+                 wfi_main   0x000320    program     static W:\solapowa\pic\prog1_9.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                wait_long   0x000001    program     static W:\solapowa\pic\prog1_9.asm
+          wait_long_loop1   0x000003    program     static W:\solapowa\pic\prog1_9.asm
+          wait_long_loop2   0x000005    program     static W:\solapowa\pic\prog1_9.asm
+              wait_longer   0x00000a    program     static W:\solapowa\pic\prog1_9.asm
+        wait_longer_loop1   0x00000c    program     static W:\solapowa\pic\prog1_9.asm
+        wait_longer_loop2   0x00000e    program     static W:\solapowa\pic\prog1_9.asm
+        wait_longer_loop3   0x000010    program     static W:\solapowa\pic\prog1_9.asm
+                 wait_5us   0x000017    program     static W:\solapowa\pic\prog1_9.asm
+                 spi_init   0x00001c    program     static W:\solapowa\pic\prog1_9.asm
+          _spi_send_begin   0x00002f    program     static W:\solapowa\pic\prog1_9.asm
+         _spi_send_memory   0x000034    program     static W:\solapowa\pic\prog1_9.asm
+           _spi_send_loop   0x000038    program     static W:\solapowa\pic\prog1_9.asm
+           _spi_send_wait   0x000045    program     static W:\solapowa\pic\prog1_9.asm
+            _spi_send_end   0x00004f    program     static W:\solapowa\pic\prog1_9.asm
+                 spi_send   0x000054    program     static W:\solapowa\pic\prog1_9.asm
+        spi_send_and_dump   0x00005c    program     static W:\solapowa\pic\prog1_9.asm
+                 eth_init   0x00008b    program     static W:\solapowa\pic\prog1_9.asm
+          eth_send_packet   0x0000d0    program     static W:\solapowa\pic\prog1_9.asm
+                 mem_read   0x00011b    program     static W:\solapowa\pic\prog1_9.asm
+                 mem_init   0x000127    program     static W:\solapowa\pic\prog1_9.asm
+   ow_strong_pullup_begin   0x000138    program     static W:\solapowa\pic\prog1_9.asm
+     ow_strong_pullup_end   0x00013e    program     static W:\solapowa\pic\prog1_9.asm
+                 ow_reset   0x000146    program     static W:\solapowa\pic\prog1_9.asm
+             ow_send_byte   0x000161    program     static W:\solapowa\pic\prog1_9.asm
+        ow_send_byte_loop   0x000166    program     static W:\solapowa\pic\prog1_9.asm
+          ow_receive_byte   0x00017c    program     static W:\solapowa\pic\prog1_9.asm
+     ow_receive_byte_loop   0x000180    program     static W:\solapowa\pic\prog1_9.asm
+      ow_reset_and_select   0x00019d    program     static W:\solapowa\pic\prog1_9.asm
+ thermo_detect_one_device   0x0001b1    program     static W:\solapowa\pic\prog1_9.asm
+     thermo_measure_begin   0x0001c5    program     static W:\solapowa\pic\prog1_9.asm
+       thermo_measure_end   0x0001ca    program     static W:\solapowa\pic\prog1_9.asm
+              thermo_read   0x0001cc    program     static W:\solapowa\pic\prog1_9.asm
+            thermo_read_1   0x0001e2    program     static W:\solapowa\pic\prog1_9.asm
+               timer_init   0x0001e3    program     static W:\solapowa\pic\prog1_9.asm
+    timer_increase_second   0x0001eb    program     static W:\solapowa\pic\prog1_9.asm
+   timer_interrupt_caught   0x0001f5    program     static W:\solapowa\pic\prog1_9.asm
+             measure_init   0x0001fb    program     static W:\solapowa\pic\prog1_9.asm
+             measure_wait   0x000206    program     static W:\solapowa\pic\prog1_9.asm
+              measure_an4   0x00020b    program     static W:\solapowa\pic\prog1_9.asm
+                  led_off   0x00021c    program     static W:\solapowa\pic\prog1_9.asm
+                  led_red   0x000221    program     static W:\solapowa\pic\prog1_9.asm
+                led_green   0x000226    program     static W:\solapowa\pic\prog1_9.asm
+               led_yellow   0x00022b    program     static W:\solapowa\pic\prog1_9.asm
+                init_vars   0x000230    program     static W:\solapowa\pic\prog1_9.asm
+                     init   0x00028d    program     static W:\solapowa\pic\prog1_9.asm
+          select_thermo_1   0x0002ab    program     static W:\solapowa\pic\prog1_9.asm
+          select_thermo_2   0x0002bc    program     static W:\solapowa\pic\prog1_9.asm
+          select_thermo_3   0x0002cd    program     static W:\solapowa\pic\prog1_9.asm
+          select_thermo_4   0x0002de    program     static W:\solapowa\pic\prog1_9.asm
+           store_thermo_1   0x0002ef    program     static W:\solapowa\pic\prog1_9.asm
+           store_thermo_2   0x0002f4    program     static W:\solapowa\pic\prog1_9.asm
+           store_thermo_3   0x0002f9    program     static W:\solapowa\pic\prog1_9.asm
+           store_thermo_4   0x0002fe    program     static W:\solapowa\pic\prog1_9.asm
+        show_charge_led_0   0x000303    program     static W:\solapowa\pic\prog1_9.asm
+        show_charge_led_1   0x000305    program     static W:\solapowa\pic\prog1_9.asm
+        show_charge_led_2   0x000307    program     static W:\solapowa\pic\prog1_9.asm
+        show_charge_led_3   0x000309    program     static W:\solapowa\pic\prog1_9.asm
+        show_charge_led_4   0x00030b    program     static W:\solapowa\pic\prog1_9.asm
+               panic_loop   0x00030d    program     static W:\solapowa\pic\prog1_9.asm
+                    panic   0x00030d    program     static W:\solapowa\pic\prog1_9.asm
+              panic_check   0x00031a    program     static W:\solapowa\pic\prog1_9.asm
+     do_temperature_check   0x00031b    program     static W:\solapowa\pic\prog1_9.asm
+                 wfi_main   0x000320    program     static W:\solapowa\pic\prog1_9.asm
+                 wfi_loop   0x000321    program     static W:\solapowa\pic\prog1_9.asm
+               wfi_loop_1   0x000322    program     static W:\solapowa\pic\prog1_9.asm
+               wfi_loop_2   0x000327    program     static W:\solapowa\pic\prog1_9.asm
+                     main   0x000330    program     static W:\solapowa\pic\prog1_9.asm
+                main_loop   0x000332    program     static W:\solapowa\pic\prog1_9.asm
+
+

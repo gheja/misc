@@ -1,0 +1,6 @@
+Warning[207] D:\WORKS\VOLTMETER\PROG3.ASM 4 : Found label after column 1. (COUNTER)
+Message[302] D:\WORKS\VOLTMETER\PROG3.ASM 17 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\WORKS\VOLTMETER\PROG3.ASM 19 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] D:\WORKS\VOLTMETER\PROG3.ASM 27 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\WORKS\VOLTMETER\PROG3.ASM 39 : Using default destination of 1 (file).
+Message[305] D:\WORKS\VOLTMETER\PROG3.ASM 40 : Using default destination of 1 (file).

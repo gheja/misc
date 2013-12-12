@@ -1,0 +1,154 @@
+MPLINK 4.40, Linker
+Linker Map File - Created Sun Mar 11 23:49:32 2012
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000642
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000320      
+            801 out of 8454 program addresses used, program memory utilization is 9%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+          _spi_send_begin   0x00001b    program     static D:\works\voltmeter\prog1_5.asm
+            _spi_send_end   0x000038    program     static D:\works\voltmeter\prog1_5.asm
+           _spi_send_loop   0x000023    program     static D:\works\voltmeter\prog1_5.asm
+         _spi_send_memory   0x00001f    program     static D:\works\voltmeter\prog1_5.asm
+           _spi_send_wait   0x000030    program     static D:\works\voltmeter\prog1_5.asm
+     do_temperature_check   0x0002c2    program     static D:\works\voltmeter\prog1_5.asm
+                 eth_init   0x00006b    program     static D:\works\voltmeter\prog1_5.asm
+          eth_send_packet   0x0000b0    program     static D:\works\voltmeter\prog1_5.asm
+                     init   0x000232    program     static D:\works\voltmeter\prog1_5.asm
+                init_vars   0x0001d5    program     static D:\works\voltmeter\prog1_5.asm
+         led_charge_green   0x0001d0    program     static D:\works\voltmeter\prog1_5.asm
+           led_charge_off   0x0001c6    program     static D:\works\voltmeter\prog1_5.asm
+        led_charge_yellow   0x0001cb    program     static D:\works\voltmeter\prog1_5.asm
+         led_status_green   0x0001c1    program     static D:\works\voltmeter\prog1_5.asm
+           led_status_red   0x0001bc    program     static D:\works\voltmeter\prog1_5.asm
+                     main   0x0002db    program     static D:\works\voltmeter\prog1_5.asm
+                main_loop   0x0002dc    program     static D:\works\voltmeter\prog1_5.asm
+          measure_input_1   0x00024c    program     static D:\works\voltmeter\prog1_5.asm
+          measure_input_2   0x00024d    program     static D:\works\voltmeter\prog1_5.asm
+          ow_receive_byte   0x00013d    program     static D:\works\voltmeter\prog1_5.asm
+     ow_receive_byte_loop   0x000141    program     static D:\works\voltmeter\prog1_5.asm
+                 ow_reset   0x000107    program     static D:\works\voltmeter\prog1_5.asm
+      ow_reset_and_select   0x00015e    program     static D:\works\voltmeter\prog1_5.asm
+             ow_send_byte   0x000122    program     static D:\works\voltmeter\prog1_5.asm
+        ow_send_byte_loop   0x000127    program     static D:\works\voltmeter\prog1_5.asm
+   ow_strong_pullup_begin   0x0000f9    program     static D:\works\voltmeter\prog1_5.asm
+     ow_strong_pullup_end   0x0000ff    program     static D:\works\voltmeter\prog1_5.asm
+                    panic   0x0002b0    program     static D:\works\voltmeter\prog1_5.asm
+              panic_check   0x0002bd    program     static D:\works\voltmeter\prog1_5.asm
+               panic_loop   0x0002b0    program     static D:\works\voltmeter\prog1_5.asm
+          select_thermo_1   0x00024e    program     static D:\works\voltmeter\prog1_5.asm
+          select_thermo_2   0x00025f    program     static D:\works\voltmeter\prog1_5.asm
+          select_thermo_3   0x000270    program     static D:\works\voltmeter\prog1_5.asm
+          select_thermo_4   0x000281    program     static D:\works\voltmeter\prog1_5.asm
+        show_charge_led_0   0x0002a6    program     static D:\works\voltmeter\prog1_5.asm
+        show_charge_led_1   0x0002a8    program     static D:\works\voltmeter\prog1_5.asm
+        show_charge_led_2   0x0002aa    program     static D:\works\voltmeter\prog1_5.asm
+        show_charge_led_3   0x0002ac    program     static D:\works\voltmeter\prog1_5.asm
+        show_charge_led_4   0x0002ae    program     static D:\works\voltmeter\prog1_5.asm
+                 spi_init   0x00000f    program     static D:\works\voltmeter\prog1_5.asm
+                 spi_send   0x00003a    program     static D:\works\voltmeter\prog1_5.asm
+        spi_send_and_dump   0x000042    program     static D:\works\voltmeter\prog1_5.asm
+           store_thermo_1   0x000292    program     static D:\works\voltmeter\prog1_5.asm
+           store_thermo_2   0x000297    program     static D:\works\voltmeter\prog1_5.asm
+           store_thermo_3   0x00029c    program     static D:\works\voltmeter\prog1_5.asm
+           store_thermo_4   0x0002a1    program     static D:\works\voltmeter\prog1_5.asm
+ thermo_detect_one_device   0x000172    program     static D:\works\voltmeter\prog1_5.asm
+     thermo_measure_begin   0x000186    program     static D:\works\voltmeter\prog1_5.asm
+       thermo_measure_end   0x00018b    program     static D:\works\voltmeter\prog1_5.asm
+              thermo_read   0x00018d    program     static D:\works\voltmeter\prog1_5.asm
+            thermo_read_1   0x0001a3    program     static D:\works\voltmeter\prog1_5.asm
+    timer_increase_second   0x0001ac    program     static D:\works\voltmeter\prog1_5.asm
+               timer_init   0x0001a4    program     static D:\works\voltmeter\prog1_5.asm
+   timer_interrupt_caught   0x0001b6    program     static D:\works\voltmeter\prog1_5.asm
+                 wait_5us   0x00000a    program     static D:\works\voltmeter\prog1_5.asm
+                wait_long   0x000001    program     static D:\works\voltmeter\prog1_5.asm
+          wait_long_loop1   0x000003    program     static D:\works\voltmeter\prog1_5.asm
+          wait_long_loop2   0x000005    program     static D:\works\voltmeter\prog1_5.asm
+                 wfi_loop   0x0002ca    program     static D:\works\voltmeter\prog1_5.asm
+               wfi_loop_1   0x0002cc    program     static D:\works\voltmeter\prog1_5.asm
+               wfi_loop_2   0x0002d1    program     static D:\works\voltmeter\prog1_5.asm
+                 wfi_main   0x0002c9    program     static D:\works\voltmeter\prog1_5.asm
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                wait_long   0x000001    program     static D:\works\voltmeter\prog1_5.asm
+          wait_long_loop1   0x000003    program     static D:\works\voltmeter\prog1_5.asm
+          wait_long_loop2   0x000005    program     static D:\works\voltmeter\prog1_5.asm
+                 wait_5us   0x00000a    program     static D:\works\voltmeter\prog1_5.asm
+                 spi_init   0x00000f    program     static D:\works\voltmeter\prog1_5.asm
+          _spi_send_begin   0x00001b    program     static D:\works\voltmeter\prog1_5.asm
+         _spi_send_memory   0x00001f    program     static D:\works\voltmeter\prog1_5.asm
+           _spi_send_loop   0x000023    program     static D:\works\voltmeter\prog1_5.asm
+           _spi_send_wait   0x000030    program     static D:\works\voltmeter\prog1_5.asm
+            _spi_send_end   0x000038    program     static D:\works\voltmeter\prog1_5.asm
+                 spi_send   0x00003a    program     static D:\works\voltmeter\prog1_5.asm
+        spi_send_and_dump   0x000042    program     static D:\works\voltmeter\prog1_5.asm
+                 eth_init   0x00006b    program     static D:\works\voltmeter\prog1_5.asm
+          eth_send_packet   0x0000b0    program     static D:\works\voltmeter\prog1_5.asm
+   ow_strong_pullup_begin   0x0000f9    program     static D:\works\voltmeter\prog1_5.asm
+     ow_strong_pullup_end   0x0000ff    program     static D:\works\voltmeter\prog1_5.asm
+                 ow_reset   0x000107    program     static D:\works\voltmeter\prog1_5.asm
+             ow_send_byte   0x000122    program     static D:\works\voltmeter\prog1_5.asm
+        ow_send_byte_loop   0x000127    program     static D:\works\voltmeter\prog1_5.asm
+          ow_receive_byte   0x00013d    program     static D:\works\voltmeter\prog1_5.asm
+     ow_receive_byte_loop   0x000141    program     static D:\works\voltmeter\prog1_5.asm
+      ow_reset_and_select   0x00015e    program     static D:\works\voltmeter\prog1_5.asm
+ thermo_detect_one_device   0x000172    program     static D:\works\voltmeter\prog1_5.asm
+     thermo_measure_begin   0x000186    program     static D:\works\voltmeter\prog1_5.asm
+       thermo_measure_end   0x00018b    program     static D:\works\voltmeter\prog1_5.asm
+              thermo_read   0x00018d    program     static D:\works\voltmeter\prog1_5.asm
+            thermo_read_1   0x0001a3    program     static D:\works\voltmeter\prog1_5.asm
+               timer_init   0x0001a4    program     static D:\works\voltmeter\prog1_5.asm
+    timer_increase_second   0x0001ac    program     static D:\works\voltmeter\prog1_5.asm
+   timer_interrupt_caught   0x0001b6    program     static D:\works\voltmeter\prog1_5.asm
+           led_status_red   0x0001bc    program     static D:\works\voltmeter\prog1_5.asm
+         led_status_green   0x0001c1    program     static D:\works\voltmeter\prog1_5.asm
+           led_charge_off   0x0001c6    program     static D:\works\voltmeter\prog1_5.asm
+        led_charge_yellow   0x0001cb    program     static D:\works\voltmeter\prog1_5.asm
+         led_charge_green   0x0001d0    program     static D:\works\voltmeter\prog1_5.asm
+                init_vars   0x0001d5    program     static D:\works\voltmeter\prog1_5.asm
+                     init   0x000232    program     static D:\works\voltmeter\prog1_5.asm
+          measure_input_1   0x00024c    program     static D:\works\voltmeter\prog1_5.asm
+          measure_input_2   0x00024d    program     static D:\works\voltmeter\prog1_5.asm
+          select_thermo_1   0x00024e    program     static D:\works\voltmeter\prog1_5.asm
+          select_thermo_2   0x00025f    program     static D:\works\voltmeter\prog1_5.asm
+          select_thermo_3   0x000270    program     static D:\works\voltmeter\prog1_5.asm
+          select_thermo_4   0x000281    program     static D:\works\voltmeter\prog1_5.asm
+           store_thermo_1   0x000292    program     static D:\works\voltmeter\prog1_5.asm
+           store_thermo_2   0x000297    program     static D:\works\voltmeter\prog1_5.asm
+           store_thermo_3   0x00029c    program     static D:\works\voltmeter\prog1_5.asm
+           store_thermo_4   0x0002a1    program     static D:\works\voltmeter\prog1_5.asm
+        show_charge_led_0   0x0002a6    program     static D:\works\voltmeter\prog1_5.asm
+        show_charge_led_1   0x0002a8    program     static D:\works\voltmeter\prog1_5.asm
+        show_charge_led_2   0x0002aa    program     static D:\works\voltmeter\prog1_5.asm
+        show_charge_led_3   0x0002ac    program     static D:\works\voltmeter\prog1_5.asm
+        show_charge_led_4   0x0002ae    program     static D:\works\voltmeter\prog1_5.asm
+               panic_loop   0x0002b0    program     static D:\works\voltmeter\prog1_5.asm
+                    panic   0x0002b0    program     static D:\works\voltmeter\prog1_5.asm
+              panic_check   0x0002bd    program     static D:\works\voltmeter\prog1_5.asm
+     do_temperature_check   0x0002c2    program     static D:\works\voltmeter\prog1_5.asm
+                 wfi_main   0x0002c9    program     static D:\works\voltmeter\prog1_5.asm
+                 wfi_loop   0x0002ca    program     static D:\works\voltmeter\prog1_5.asm
+               wfi_loop_1   0x0002cc    program     static D:\works\voltmeter\prog1_5.asm
+               wfi_loop_2   0x0002d1    program     static D:\works\voltmeter\prog1_5.asm
+                     main   0x0002db    program     static D:\works\voltmeter\prog1_5.asm
+                main_loop   0x0002dc    program     static D:\works\voltmeter\prog1_5.asm
+
+
