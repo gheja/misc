@@ -73,7 +73,7 @@ function render_frame()
 			}
 			else
 			{
-				_data.data[b] = a - Math.sin(_b * 0.1) * 200;
+				_data.data[b] = a - Math.abs(Math.sin(_b * 0.1)) * 200;
 				_data.data[b + 1] = a * 0.5;
 				_data.data[b + 2] = 0;
 			}
