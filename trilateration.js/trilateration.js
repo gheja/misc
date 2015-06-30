@@ -9,7 +9,7 @@
   * This library does not need any 3rd party tools as all the non-basic
   * geometric functions needed are declared inside the trilaterate() function.
   *
-  * See the GitHub page: https://github.com/gheja/misc/trilateration.js/
+  * See the GitHub page: https://github.com/gheja/misc/tree/master/trilateration.js
   */
 
 /**
