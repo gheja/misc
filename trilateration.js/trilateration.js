@@ -118,12 +118,12 @@ function trilaterate(p1, p2, p3, return_both)
 	p4a = vector_add(a, vector_multiply(ez, z));
 	p4b = vector_subtract(a, vector_multiply(ez, z));
 	
-	if (return_both)
+	if (return_both && z != 0)
 	{
 		return [ p4a, p4b ];
 	}
 	else
 	{
-		return p4a;
+		return a;
 	}
 }
