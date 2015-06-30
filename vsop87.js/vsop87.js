@@ -10,7 +10,7 @@
   *   * datafiles: ftp://cdsarc.u-strasbg.fr/pub/cats/VI%2F81/
   *   * calculations: http://www.caglow.com/info/compute/vsop87
   *
-  * See the GitHub page: https://github.com/gheja/misc/vsop87.js/
+  * See the GitHub page: https://github.com/gheja/misc/tree/master/vsop87.js
   *
   * This library is optimized for readability and simplicity, not speed
   * or size, as I was unable to find a simple JavaScript example for the
