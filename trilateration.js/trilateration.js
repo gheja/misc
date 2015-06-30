@@ -18,15 +18,17 @@
   *
   * If no solution found then null will be returned.
   *
-  * If two solutions found then the first one will be returned, unless the
-  * fourth parameter (return_both) set to true.
+  * If two solutions found then both will be returned, unless the fourth
+  * parameter (return_middle) is set to true when the middle of the two solution
+  * will be returned.
   *
   * @param {Object} p1 Point and distance: { x, y, z, r }
   * @param {Object} p2 Point and distance: { x, y, z, r }
   * @param {Object} p3 Point and distance: { x, y, z, r }
+  * @param {bool} return_middle If two solution found then return the center of them
   * @return {Object|Array|null} { x, y, z } or [ { x, y, z }, { x, y, z } ] or null
   */
-function trilaterate(p1, p2, p3, return_both)
+function trilaterate(p1, p2, p3, return_middle)
 {
 	// based on: https://en.wikipedia.org/wiki/Trilateration
 	
@@ -118,12 +120,12 @@ function trilaterate(p1, p2, p3, return_both)
 	p4a = vector_add(a, vector_multiply(ez, z));
 	p4b = vector_subtract(a, vector_multiply(ez, z));
 	
-	if (return_both && z != 0)
+	if (z == 0 || return_middle)
 	{
-		return [ p4a, p4b ];
+		return a;
 	}
 	else
 	{
-		return a;
+		return [ p4a, p4b ];
 	}
 }

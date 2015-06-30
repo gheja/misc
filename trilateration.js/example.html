@@ -28,6 +28,12 @@
 		</p>
 		
 		<p>
+			There is an optional fourth parameter after the three points for
+			trilaterate() for the case of two solutions to return the middle
+			of them as one point.
+		</p>
+		
+		<p>
 			In this example...
 			<ul>
 				<li>the canvas will turn red if no solution can be found,</li>
@@ -58,7 +64,7 @@
 				p2 = { x: 500, y: 200, z:  0, r: 370 };
 				p3 = { x: 400, y: 500, z: 40, r: 350 };
 				
-				p4 = trilaterate(p1, p2, p3, true);
+				p4 = trilaterate(p1, p2, p3);
 				
 				if (p4 !== null)
 				{
