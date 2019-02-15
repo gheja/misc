@@ -25,7 +25,8 @@ After=network.target
 Type=simple
 User=$user
 ExecStart=$command
-Restart=on-failure
+Restart=always
+RestartSec=5
 
 [Install]
 WantedBy=multi-user.target
