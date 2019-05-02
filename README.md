@@ -1,8 +1,15 @@
-misc
-====
+#misc
 
-Octocats
---------
+## html5_canvas_effects
+
+Some effect tests. Example:
+
+![metaball01e](./html5_canvas_effects/previews/metaball01e.png)
+
+(Try them here)[https://gheja.github.io/misc/html5_canvas_effects]
+
+
+## Octocats
 
 I have created two Octocats like the ones you can see on [Octodex](http://octodex.github.com/) based on the [original Octocat](http://octodex.github.com/original/), these are made just for fun. For the legal things please see the [Octodex FAQ page](http://octodex.github.com/faq.html).
 
