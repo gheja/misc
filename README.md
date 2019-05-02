@@ -1,4 +1,7 @@
-#misc
+# misc
+
+Some miscellaneous scripts, tests, experiments that did not fit else.
+
 
 ## html5_canvas_effects
 
@@ -6,7 +9,7 @@ Some effect tests. Example:
 
 ![metaball01e](./html5_canvas_effects/previews/metaball01e.png)
 
-(Try them here)[https://gheja.github.io/misc/html5_canvas_effects]
+[Try them here](https://gheja.github.io/misc/html5_canvas_effects)
 
 
 ## Octocats
