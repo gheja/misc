@@ -6,6 +6,18 @@ Metaballs. Because why not?
 
 ---
 
+![metaball01a1](previews/metaball01a1.png)
+
+[metaball01a1.html](./metaball01a1.html)
+
+---
+
+![metaball01a2](previews/metaball01a2.png)
+
+[metaball01a2.html](./metaball01a2.html)
+
+---
+
 ![metaball01b](previews/metaball01b.png)
 
 [metaball01b.html](./metaball01b.html)
