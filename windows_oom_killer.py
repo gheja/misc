@@ -20,6 +20,7 @@ def do_oom_kill():
             tmp['username'] = p.username() # this might cause an AccessDenied exception
             tmp['memory_rss'] = p.memory_info().rss
             tmp['consider'] = (tmp['name'] not in PROCESS_WHITELIST)
+            # tmp['consider'] = (tmp['name'] == 'freecad.exe')
             processes.append(tmp)
         except:
             continue
@@ -30,16 +31,20 @@ def do_oom_kill():
             own_username = p['username']
             break
 
-    # filter the processes for the ones that is being run by the same user as the script, if detected
+    # filter the processes for the ones being run by the same user as the script (if detected)
     if own_username:
-        processes = filter(lambda a: a['username'] == own_username, processes)
+        for p in processes:
+            if p['username'] != own_username:
+                p['consider'] = False
 
+    # sort by memory usage, descending
     processes = sorted(processes, key = lambda a: a['memory_rss'], reverse=True)
 
     print('All processes:')
     for p in processes:
         print(' ', p)
 
+    # find the first process with `consider` == `True` and kill it if found
     for p in processes:
         if not p['consider']:
             continue
@@ -50,7 +55,7 @@ def do_oom_kill():
         p2 = psutil.Process(p['pid'])
         p2.kill()
 
-        break
+        return
 
     print('WARNING: No process found to kill.')
 
